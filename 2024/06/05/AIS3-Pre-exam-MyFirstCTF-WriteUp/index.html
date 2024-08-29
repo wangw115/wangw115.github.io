@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="MyFirstCTF6st place  misc Quantum Nim Heist發現輸入時按enter好像會沒移除石頭，反正最後使自己移除最後一顆  Three Dimensional Secret追蹤TCP流，並另存為一個檔案在 https:&#x2F;&#x2F;ncviewer.com&#x2F; 開啟此檔案  Emoji Console試了很久發現”:|”後的指令可以執行   web Evil Calculato">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AIS3 Pre-exam &amp; MyFirstCTF   WriteUp">
+<meta property="og:url" content="http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/index.html">
+<meta property="og:site_name" content="wang&#39;s blog">
+<meta property="og:description" content="MyFirstCTF6st place  misc Quantum Nim Heist發現輸入時按enter好像會沒移除石頭，反正最後使自己移除最後一顆  Three Dimensional Secret追蹤TCP流，並另存為一個檔案在 https:&#x2F;&#x2F;ncviewer.com&#x2F; 開啟此檔案  Emoji Console試了很久發現”:|”後的指令可以執行   web Evil Calculato">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%202024-06-08%20103002.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1zyOs14A.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJQJi3JNA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJQo93JVA.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJGlq3xVC.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rJP1ws1ER.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SyjJ0jkE0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJe5psyER.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/r1xvCDXV0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Skk3yu7VR.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJVI8uQV0.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Bk4u9j1EC.png">
+<meta property="article:published_time" content="2024-06-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-28T18:59:15.398Z">
+<meta property="article:author" content="wang">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="AIS3">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%202024-06-08%20103002.png">
+    
+    
+    <!-- title -->
+    <title>AIS3 Pre-exam &amp; MyFirstCTF   WriteUp</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86660611-1"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-86660611-1');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/tag/">Tag</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/07/17/SCIST-4th-Final-CTF-WriteUp/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/&text=AIS3 Pre-exam &amp; MyFirstCTF   WriteUp"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/&title=AIS3 Pre-exam &amp; MyFirstCTF   WriteUp"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/&is_video=false&description=AIS3 Pre-exam &amp; MyFirstCTF   WriteUp"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=AIS3 Pre-exam &amp; MyFirstCTF   WriteUp&body=Check out this article: http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/&title=AIS3 Pre-exam &amp; MyFirstCTF   WriteUp"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/&title=AIS3 Pre-exam &amp; MyFirstCTF   WriteUp"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/&title=AIS3 Pre-exam &amp; MyFirstCTF   WriteUp"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/&title=AIS3 Pre-exam &amp; MyFirstCTF   WriteUp"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/&name=AIS3 Pre-exam &amp; MyFirstCTF   WriteUp&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/&t=AIS3 Pre-exam &amp; MyFirstCTF   WriteUp"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#misc"><span class="toc-number">1.</span> <span class="toc-text">misc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web"><span class="toc-number">2.</span> <span class="toc-text">web</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rev"><span class="toc-number">3.</span> <span class="toc-text">rev</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#crypto"><span class="toc-number">4.</span> <span class="toc-text">crypto</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        AIS3 Pre-exam &amp; MyFirstCTF   WriteUp
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-06-04T16:00:00.000Z" class="dt-published" itemprop="datePublished">2024-06-05</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/AIS3/" rel="tag">AIS3</a>, <a class="p-category" href="/tags/CTF/" rel="tag">CTF</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>MyFirstCTF<br>6st place</p>
+<p><img src="/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%202024-06-08%20103002.png" alt="alt text"></p>
+<h3 id="misc"><a href="#misc" class="headerlink" title="misc"></a>misc</h3><ul>
+<li><p>Quantum Nim Heist<br>發現輸入時按enter好像會沒移除石頭，反正最後使自己移除最後一顆<br><img src="https://hackmd.io/_uploads/B1zyOs14A.png" alt="image"></p>
+</li>
+<li><p>Three Dimensional Secret<br><img src="https://hackmd.io/_uploads/BJQJi3JNA.png" alt="image"><br>追蹤TCP流，並另存為一個檔案<br>在 <a target="_blank" rel="noopener" href="https://ncviewer.com/">https://ncviewer.com/</a> 開啟此檔案<br><img src="https://hackmd.io/_uploads/HJQo93JVA.png" alt="image"></p>
+</li>
+<li><p>Emoji Console<br>試了很久發現”:|”後的指令可以執行<br><img src="https://hackmd.io/_uploads/BJGlq3xVC.png" alt="image"></p>
+</li>
+</ul>
+<h3 id="web"><a href="#web" class="headerlink" title="web"></a>web</h3><ul>
+<li>Evil Calculator<br><img src="https://hackmd.io/_uploads/rJP1ws1ER.png" alt="image"></li>
+</ul>
+<h3 id="rev"><a href="#rev" class="headerlink" title="rev"></a>rev</h3><ul>
+<li><p>The Long Print<br>這本來是一個很大的數字，patch成1，變每秒print一個字元<br><img src="https://hackmd.io/_uploads/SyjJ0jkE0.png" alt="image"><br>趕在消失不見前趕快截圖<br><img src="https://hackmd.io/_uploads/HJe5psyER.png" alt="image"><br>最後的”}”大概一輸出就不見了，自己補上</p>
+</li>
+<li><p>火拳のエース<br>先執行，發現flag輸出了一小部份且輸出速度太慢<br>IDA，從main進到print_flag()，patch輸出時要等待的時間，改成0<br><img src="https://hackmd.io/_uploads/r1xvCDXV0.png" alt="image"><br>輸出正常後回到main繼續分析，找剩下的flag<br><img src="https://hackmd.io/_uploads/Skk3yu7VR.png" alt="image"><br>首先是輸入四個字串空白分隔<br>然後在 xor_strings() 這四個字串分別跟四個不同的東西做XOR，從IDA我不會看這4個東西是甚麼，用ghidra看到了，把他們的前8 bytes 記下來<br>再來四個字串的每個字元經過 complex_function() 轉換<br>最後判斷是否4個轉換後的字串都等於對應的字串<br>&#x3D;&gt; 於是4個字串分別暴力破解，找出輸入什麼最後會變成對應的字串<br>每個字串的暴力破解程式有微調，以第四個字串為例</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> xor_hex0[] = &#123;<span class="number">0x0E</span>, <span class="number">0x0D</span>, <span class="number">0x7D</span>, <span class="number">0x06</span>, <span class="number">0x0F</span>, <span class="number">0x17</span>, <span class="number">0x76</span>, <span class="number">0x04</span>&#125;;</span><br><span class="line"><span class="type">int</span> xor_hex1[] = &#123;<span class="number">0x6D</span>, <span class="number">0x00</span>, <span class="number">0x1B</span>, <span class="number">0x7C</span>, <span class="number">0x6C</span>, <span class="number">0x13</span>, <span class="number">0x62</span>, <span class="number">0x11</span>&#125;;</span><br><span class="line"><span class="type">int</span> xor_hex2[] = &#123;<span class="number">0x1E</span>, <span class="number">0x7E</span>, <span class="number">0x06</span>, <span class="number">0x13</span>, <span class="number">0x07</span>, <span class="number">0x66</span>, <span class="number">0x0E</span>, <span class="number">0x71</span>&#125;;</span><br><span class="line"><span class="type">int</span> xor_hex3[] = &#123;<span class="number">0x17</span>, <span class="number">0x14</span>, <span class="number">0x1D</span>, <span class="number">0x70</span>, <span class="number">0x79</span>, <span class="number">0x67</span>, <span class="number">0x74</span>, <span class="number">0x33</span>&#125;;</span><br><span class="line"></span><br><span class="line">string target0 = <span class="string">&quot;DHLIYJEG&quot;</span>;</span><br><span class="line">string target1 = <span class="string">&quot;MZRERYND&quot;</span>;</span><br><span class="line">string target2 = <span class="string">&quot;RUYODBAH&quot;</span>;</span><br><span class="line">string target3 = <span class="string">&quot;BKEMPBRE&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">xor_strings</span><span class="params">(string input, <span class="type">int</span> xor_hex[], <span class="type">int</span>* result_int)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">int</span> i;</span><br><span class="line">  <span class="type">int</span> input_int[<span class="number">9</span>];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt;= <span class="number">7</span>; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    input_int[i] = <span class="built_in">int</span>(input[i]);</span><br><span class="line">    result_int[i] = input_int[i] ^ xor_hex[i];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">complex_function</span><span class="params">(<span class="type">int</span> a1, <span class="type">int</span> a2)</span></span>&#123;</span><br><span class="line">  <span class="type">int</span> v2; <span class="comment">// eax</span></span><br><span class="line">  <span class="type">int</span> v4; <span class="comment">// [esp-Ch] [ebp-24h]</span></span><br><span class="line">  <span class="type">int</span> v5; <span class="comment">// [esp-8h] [ebp-20h]</span></span><br><span class="line">  <span class="type">int</span> v6; <span class="comment">// [esp-4h] [ebp-1Ch]</span></span><br><span class="line">  <span class="type">int</span> v7; <span class="comment">// [esp+8h] [ebp-10h]</span></span><br><span class="line">  <span class="type">int</span> v8; <span class="comment">// [esp+Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( a1 &lt;= <span class="number">64</span> || a1 &gt; <span class="number">90</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">64</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  v8 = (<span class="number">17</span> * a2 + a1 - <span class="number">65</span>) % <span class="number">26</span>;</span><br><span class="line">  v7 = a2 % <span class="number">3</span> + <span class="number">3</span>;</span><br><span class="line">  v2 = a2 % <span class="number">3</span>;</span><br><span class="line">  <span class="keyword">if</span> ( a2 % <span class="number">3</span> == <span class="number">2</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    v8 = (v8 - v7 + <span class="number">26</span>) % <span class="number">26</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> ( v2 &lt;= <span class="number">2</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( v2 )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> ( v2 == <span class="number">1</span> )</span><br><span class="line">        v8 = (<span class="number">2</span> * v7 + v8) % <span class="number">26</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      v8 = (v7 * v8 + <span class="number">7</span>) % <span class="number">26</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> v8 + <span class="number">65</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    string input = <span class="string">&quot;        &quot;</span>;</span><br><span class="line">    string result = <span class="string">&quot;AAAAAAAA&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">8</span>;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">33</span>;j&lt;<span class="number">127</span>;j++)&#123;</span><br><span class="line">            input[i] = <span class="built_in">char</span>(j);</span><br><span class="line">            <span class="type">int</span> tmp[<span class="number">9</span>];</span><br><span class="line">            <span class="built_in">xor_strings</span>(input, xor_hex3, tmp);</span><br><span class="line">            result[i] = <span class="built_in">char</span>(<span class="built_in">complex_function</span>(tmp[i], i<span class="number">+96</span>));</span><br><span class="line">            <span class="keyword">if</span>(result[i] == target3[i])&#123;</span><br><span class="line">                cout&lt;&lt;result&lt;&lt;endl;</span><br><span class="line">                cout&lt;&lt;input&lt;&lt;endl;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>輸出<br><img src="https://hackmd.io/_uploads/SJVI8uQV0.png" alt="image"></p>
+<h3 id="crypto"><a href="#crypto" class="headerlink" title="crypto"></a>crypto</h3><ul>
+<li>babyRSA<br>改編 babyRSA.py<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> getPrime</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gcd</span>(<span class="params">a, b</span>):</span><br><span class="line">    <span class="keyword">while</span> b:</span><br><span class="line">        a, b = b, a % b</span><br><span class="line">    <span class="keyword">return</span> a</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">generate_keypair</span>(<span class="params">keysize</span>):</span><br><span class="line">    p = getPrime(keysize)</span><br><span class="line">    q = getPrime(keysize)</span><br><span class="line">    n = p * q</span><br><span class="line">    phi = (p-<span class="number">1</span>) * (q-<span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line">    e = random.randrange(<span class="number">1</span>, phi)</span><br><span class="line">    g = gcd(e, phi)</span><br><span class="line">    <span class="keyword">while</span> g != <span class="number">1</span>:</span><br><span class="line">        e = random.randrange(<span class="number">1</span>, phi)</span><br><span class="line">        g = gcd(e, phi)</span><br><span class="line">    d = <span class="built_in">pow</span>(e, -<span class="number">1</span>, phi)</span><br><span class="line">    <span class="keyword">return</span> ((e, n), (d, n))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">encrypt</span>(<span class="params">pk, plaintext</span>):</span><br><span class="line">    key, n = pk</span><br><span class="line">    cipher = [<span class="built_in">pow</span>(<span class="built_in">ord</span>(char), key, n) <span class="keyword">for</span> char <span class="keyword">in</span> plaintext]</span><br><span class="line">    <span class="keyword">return</span> cipher</span><br><span class="line"></span><br><span class="line">e = <span class="number">64917055846592305247490566318353366999709874684278480849508851204751189365198819392860386504785643859122396657301225094708026391204100352682992979425763157452255909781003406602228716107905797084217189131716198785709124050278116966890968003294485934472496151582084561439957513571043497031319413889856520421733</span></span><br><span class="line">n = <span class="number">115676743153063753482251273007095369919613374531038288437295760314264647231038870203981488393720761532040569270340726478402172283300622527884543078194060647393394510524980830171230330673500741683492143805583694395504141751460090539868114454005046898551218623342425465650881666420408703144859108346202894384649</span></span><br><span class="line"></span><br><span class="line">public = (e, n)</span><br><span class="line">enc = [...] // 就是output.txt的Encrypted:[]，太長，略</span><br><span class="line"></span><br><span class="line">flag = <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> enc:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">128</span>):</span><br><span class="line"></span><br><span class="line">        encrypted_msg = encrypt(public, <span class="built_in">chr</span>(i))</span><br><span class="line">        <span class="keyword">if</span> c <span class="keyword">in</span> encrypted_msg:</span><br><span class="line"></span><br><span class="line">            flag += <span class="built_in">chr</span>(i)</span><br><span class="line">            <span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+<img src="https://hackmd.io/_uploads/Bk4u9j1EC.png" alt="image"></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/tag/">Tag</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#misc"><span class="toc-number">1.</span> <span class="toc-text">misc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web"><span class="toc-number">2.</span> <span class="toc-text">web</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rev"><span class="toc-number">3.</span> <span class="toc-text">rev</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#crypto"><span class="toc-number">4.</span> <span class="toc-text">crypto</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/&text=AIS3 Pre-exam &amp; MyFirstCTF   WriteUp"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/&title=AIS3 Pre-exam &amp; MyFirstCTF   WriteUp"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/&is_video=false&description=AIS3 Pre-exam &amp; MyFirstCTF   WriteUp"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=AIS3 Pre-exam &amp; MyFirstCTF   WriteUp&body=Check out this article: http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/&title=AIS3 Pre-exam &amp; MyFirstCTF   WriteUp"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/&title=AIS3 Pre-exam &amp; MyFirstCTF   WriteUp"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/&title=AIS3 Pre-exam &amp; MyFirstCTF   WriteUp"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/&title=AIS3 Pre-exam &amp; MyFirstCTF   WriteUp"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/&name=AIS3 Pre-exam &amp; MyFirstCTF   WriteUp&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/06/05/AIS3-Pre-exam-MyFirstCTF-WriteUp/&t=AIS3 Pre-exam &amp; MyFirstCTF   WriteUp"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2024
+    wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/tag/">Tag</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
