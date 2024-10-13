@@ -6,17 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="team: ICEDTEArk. 33&#x2F;1360 我終於在跟冰茶的比賽中有貢獻了然後我太晚才有空寫write，比賽平台已經關了，很多沒截到圖，所以可能有的看不太懂 MiscRTL_Warmup給一個檔案 flag.vcd 1234567891011121314151617181920212223242526272829303132333435$timescale 1 ps $end$sc">
+    <meta name="description" content="team: ICEDTEArk. 33&#x2F;1360官方Writeup 我終於在跟冰茶的比賽中有貢獻了然後我太晚才有空寫write，比賽平台已經關了，很多沒截到圖，所以可能有的看不太懂 MiscRTL_Warmup給一個檔案 flag.vcd 1234567891011121314151617181920212223242526272829303132333435$timescale 1 p">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PatriotCTF 2024 Writeup by ICEDTEA">
 <meta property="og:url" content="http://example.com/2024/10/13/PatriotCTF-2024-Writeup-by-ICEDTEA/index.html">
 <meta property="og:site_name" content="wang&#39;s blog">
-<meta property="og:description" content="team: ICEDTEArk. 33&#x2F;1360 我終於在跟冰茶的比賽中有貢獻了然後我太晚才有空寫write，比賽平台已經關了，很多沒截到圖，所以可能有的看不太懂 MiscRTL_Warmup給一個檔案 flag.vcd 1234567891011121314151617181920212223242526272829303132333435$timescale 1 ps $end$sc">
+<meta property="og:description" content="team: ICEDTEArk. 33&#x2F;1360官方Writeup 我終於在跟冰茶的比賽中有貢獻了然後我太晚才有空寫write，比賽平台已經關了，很多沒截到圖，所以可能有的看不太懂 MiscRTL_Warmup給一個檔案 flag.vcd 1234567891011121314151617181920212223242526272829303132333435$timescale 1 p">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://hackmd.io/_uploads/rkALGXFJJl.png">
 <meta property="og:image" content="https://hackmd.io/_uploads/Bk8EqLYyJe.png">
 <meta property="article:published_time" content="2024-10-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-10-13T16:02:49.786Z">
+<meta property="article:modified_time" content="2024-10-13T16:11:10.256Z">
 <meta property="article:author" content="wang">
 <meta property="article:tag" content="CTF">
 <meta property="article:tag" content="ICEDTEA">
@@ -156,7 +156,7 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <p>team: ICEDTEA<br>rk. 33&#x2F;1360<br><img src="https://hackmd.io/_uploads/rkALGXFJJl.png" alt="image"></p>
+    <p>team: ICEDTEA<br>rk. 33&#x2F;1360<br><img src="https://hackmd.io/_uploads/rkALGXFJJl.png" alt="image"><br><a target="_blank" rel="noopener" href="https://github.com/MasonCompetitiveCyber/PatriotCTF2024">官方Writeup</a></p>
 <p>我終於在跟冰茶的比賽中有貢獻了<br><del>然後我太晚才有空寫write，比賽平台已經關了，很多沒截到圖，所以可能有的看不太懂</del></p>
 <h3 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h3><h4 id="RTL-Warmup"><a href="#RTL-Warmup" class="headerlink" title="RTL_Warmup"></a>RTL_Warmup</h4><p>給一個檔案 flag.vcd</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">$timescale 1 ps $end</span><br><span class="line">$scope module uut $end</span><br><span class="line">$var wire 1 ! clock $end</span><br><span class="line">$var wire 8 &quot; dout $end</span><br><span class="line">$var wire 8 # din $end</span><br><span class="line">$upscope $end</span><br><span class="line">$enddefinitions $end</span><br><span class="line">$dumpvars</span><br><span class="line">0!</span><br><span class="line">b01010000 &quot;</span><br><span class="line">b01010000 #</span><br><span class="line">$end</span><br><span class="line">#50000000</span><br><span class="line">1!</span><br><span class="line">#50000000</span><br><span class="line">#100000000</span><br><span class="line">0!</span><br><span class="line">#100000000</span><br><span class="line">b01000011 &quot;</span><br><span class="line">b01000011 #</span><br><span class="line">#150000000</span><br><span class="line">1!</span><br><span class="line">#150000000</span><br><span class="line">#200000000</span><br><span class="line">0!</span><br><span class="line">#200000000</span><br><span class="line">(中略)</span><br><span class="line">b01111101 &quot;</span><br><span class="line">b01111101 #</span><br><span class="line">#2750000000</span><br><span class="line">1!</span><br><span class="line">#2750000000</span><br><span class="line">#2800000000</span><br><span class="line">0!</span><br><span class="line">#2800000000</span><br></pre></td></tr></table></figure>
