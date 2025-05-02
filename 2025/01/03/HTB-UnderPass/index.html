@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Enumeration80 port 沒什麼發現掃 UDP先掃前30個再掃其他 1234└─$ snmpwalk  -v 1  -c public 10.10.11.48  1.3.6.1.2.1.1.5.0 # system nameiso.3.6.1.2.1.1.5.0 &#x3D; STRING: &quot;UnDerPass.htb is the only daloradius server in">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTB UnderPass">
+<meta property="og:url" content="http://example.com/2025/01/03/HTB-UnderPass/index.html">
+<meta property="og:site_name" content="wang&#39;s blog">
+<meta property="og:description" content="Enumeration80 port 沒什麼發現掃 UDP先掃前30個再掃其他 1234└─$ snmpwalk  -v 1  -c public 10.10.11.48  1.3.6.1.2.1.1.5.0 # system nameiso.3.6.1.2.1.1.5.0 &#x3D; STRING: &quot;UnDerPass.htb is the only daloradius server in">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://hackmd.io/_uploads/HynVB2mIkx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SyMtS3Q8kg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJSvrn78kg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ryBmI278Jl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/S1cfMTQIkg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HkE3KxV8Jx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SyG7cgEUJl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ryQ0cxN81x.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyWJPbNUJl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyXHt74Iyg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SkFvWTQ8Jx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HkEpZp7IJe.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/r11TQfNUke.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ryjQPzNU1g.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B19PgQN8kg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ryDlLfV8ye.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rkel_MNLke.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/S16eg7N8Jg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/r1PgZQE8yl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rkxPMQNLkl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyNcdQV8Jl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rJdTqm4IJl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/S1jYBmELJx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Byi2yNE81e.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ByErgVVLkl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyRxI44U1x.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SkB6LsE8kl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SyF2Oj4UJx.png">
+<meta property="article:published_time" content="2025-01-03T14:22:26.000Z">
+<meta property="article:modified_time" content="2025-05-02T14:28:32.130Z">
+<meta property="article:author" content="wang">
+<meta property="article:tag" content="Pentesting">
+<meta property="article:tag" content="HackTheBox">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hackmd.io/_uploads/HynVB2mIkx.png">
+    
+    
+    <!-- title -->
+    <title>HTB UnderPass</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86660611-1"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-86660611-1');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/tag/">Tag</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/01/06/HTB-Cicada/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/01/02/HTB-Cap/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/01/03/HTB-UnderPass/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/01/03/HTB-UnderPass/&text=HTB UnderPass"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/01/03/HTB-UnderPass/&title=HTB UnderPass"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/01/03/HTB-UnderPass/&is_video=false&description=HTB UnderPass"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTB UnderPass&body=Check out this article: http://example.com/2025/01/03/HTB-UnderPass/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/01/03/HTB-UnderPass/&title=HTB UnderPass"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/01/03/HTB-UnderPass/&title=HTB UnderPass"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/01/03/HTB-UnderPass/&title=HTB UnderPass"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/01/03/HTB-UnderPass/&title=HTB UnderPass"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/01/03/HTB-UnderPass/&name=HTB UnderPass&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/01/03/HTB-UnderPass/&t=HTB UnderPass"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Enumeration"><span class="toc-number">1.</span> <span class="toc-text">Enumeration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Foothold"><span class="toc-number">2.</span> <span class="toc-text">Foothold</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Privilege-Escalation"><span class="toc-number">3.</span> <span class="toc-text">Privilege Escalation</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        HTB UnderPass
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-01-03T14:22:26.000Z" class="dt-published" itemprop="datePublished">2025-01-03</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/HackTheBox/" rel="tag">HackTheBox</a>, <a class="p-category" href="/tags/Pentesting/" rel="tag">Pentesting</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h3 id="Enumeration"><a href="#Enumeration" class="headerlink" title="Enumeration"></a>Enumeration</h3><p><img src="https://hackmd.io/_uploads/HynVB2mIkx.png" alt="image"><br><img src="https://hackmd.io/_uploads/SyMtS3Q8kg.png" alt="image"><br><img src="https://hackmd.io/_uploads/BJSvrn78kg.png" alt="image"><br>80 port 沒什麼發現<br>掃 UDP<br>先掃前30個<br><img src="https://hackmd.io/_uploads/ryBmI278Jl.png" alt="image"><br>再掃其他<br><img src="https://hackmd.io/_uploads/S1cfMTQIkg.png" alt="image"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">└─$ snmpwalk  -v 1  -c public 10.10.11.48  1.3.6.1.2.1.1.5.0 <span class="comment"># system name</span></span><br><span class="line">iso.3.6.1.2.1.1.5.0 = STRING: <span class="string">&quot;UnDerPass.htb is the only daloradius server in the basin!&quot;</span></span><br><span class="line">└─$ snmpwalk  -v 1  -c public 10.10.11.48  1.3.6.1.2.1.1.1.0 <span class="comment"># sysytem description</span></span><br><span class="line">iso.3.6.1.2.1.1.1.0 = STRING: <span class="string">&quot;Linux underpass 5.15.0-126-generic #136-Ubuntu SMP Wed Nov 6 10:38:22 UTC 2024 x86_64&quot;</span></span><br></pre></td></tr></table></figure>
+<p>daloradius 應該是關鍵，查一下 github<br><img src="https://hackmd.io/_uploads/HkE3KxV8Jx.png" alt="image"><br>找它的預設帳密<br>wiki<br><img src="https://hackmd.io/_uploads/SyG7cgEUJl.png" alt="image"><br><img src="https://hackmd.io/_uploads/ryQ0cxN81x.png" alt="image"><br><img src="https://hackmd.io/_uploads/HyWJPbNUJl.png" alt="image"><br><code>Username: administrator</code><br><code>Password: radius</code><br>ssh失敗<br><img src="https://hackmd.io/_uploads/HyXHt74Iyg.png" alt="image"></p>
+<p>&#x2F;daloradius&#x2F; 存在 開始掃路徑<br><img src="https://hackmd.io/_uploads/SkFvWTQ8Jx.png" alt="image"><br><img src="https://hackmd.io/_uploads/HkEpZp7IJe.png" alt="image"><br><code>/daloradius/docker-compose.yml</code> <del>看似有用其實沒用</del><br><code>/app</code> 比較可能會登入頁面之類<br><img src="https://hackmd.io/_uploads/r11TQfNUke.png" alt="螢幕擷取畫面 2025-01-02 201851"><br><img src="https://hackmd.io/_uploads/ryjQPzNU1g.png" alt="image"><br>預設帳密登入失敗<br><img src="https://hackmd.io/_uploads/B19PgQN8kg.png" alt="image"></p>
+<p>除了 dirsearch ，也用 <code>raft-large-directories.txt</code> 針對目錄掃，掃前20000就差不多了<br><img src="https://hackmd.io/_uploads/ryDlLfV8ye.png" alt="image"><br>瀏覽器開 &#x2F;daloradius&#x2F;app&#x2F;operators 會重導向<br><img src="https://hackmd.io/_uploads/rkel_MNLke.png" alt="image"><br>預設帳密登入成功<br><img src="https://hackmd.io/_uploads/S16eg7N8Jg.png" alt="image"></p>
+<h3 id="Foothold"><a href="#Foothold" class="headerlink" title="Foothold"></a>Foothold</h3><p><img src="https://hackmd.io/_uploads/r1PgZQE8yl.png" alt="image"><br><img src="https://hackmd.io/_uploads/rkxPMQNLkl.png" alt="image"><br>一個user <code>svcMosh:underwaterfriends</code><br>登入失敗<br><img src="https://hackmd.io/_uploads/HyNcdQV8Jl.png" alt="image"><br>ssh成功<br><img src="https://hackmd.io/_uploads/rJdTqm4IJl.png" alt="image"></p>
+<p><img src="https://hackmd.io/_uploads/S1jYBmELJx.png" alt="image"><br>mysql &#96;steve:testing123 <del>沒用上ㄉ帳密</del><br>ssh 失敗<br>&#x2F;daloradius&#x2F;app&#x2F;users&#x2F;login.php 失敗</p>
+<h3 id="Privilege-Escalation"><a href="#Privilege-Escalation" class="headerlink" title="Privilege Escalation"></a>Privilege Escalation</h3><p><img src="https://hackmd.io/_uploads/Byi2yNE81e.png" alt="image"><br>svcMosh 只能用 sudo 執行 mosh-server<br><img src="https://hackmd.io/_uploads/ByErgVVLkl.png" alt="image"><br><code>admin:81pDi9Six5bIY</code><br><img src="https://hackmd.io/_uploads/HyRxI44U1x.png" alt="image"><br><code>admin:admin</code> <del>沒用上ㄉ帳密</del></p>
+<p>查 mosh 得知它是類似 ssh，但非交互式，指令執行完視窗就會自動關閉</p>
+<blockquote>
+<p>mosh usage <a target="_blank" rel="noopener" href="https://mosh.org/#techinfo">https://mosh.org/#techinfo</a><br>Q: How do I run the mosh client and server separately?</p>
+</blockquote>
+<p><img src="https://hackmd.io/_uploads/SkB6LsE8kl.png" alt="image"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># local</span></span><br><span class="line">└─$ MOSH_KEY=M8wAaXMnNoss1dvVWwHmww  mosh-client 10.10.11.48  60001</span><br></pre></td></tr></table></figure>
+<p>開啟 root shell<br><img src="https://hackmd.io/_uploads/SyF2Oj4UJx.png" alt="image"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/tag/">Tag</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Enumeration"><span class="toc-number">1.</span> <span class="toc-text">Enumeration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Foothold"><span class="toc-number">2.</span> <span class="toc-text">Foothold</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Privilege-Escalation"><span class="toc-number">3.</span> <span class="toc-text">Privilege Escalation</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/01/03/HTB-UnderPass/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/01/03/HTB-UnderPass/&text=HTB UnderPass"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/01/03/HTB-UnderPass/&title=HTB UnderPass"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/01/03/HTB-UnderPass/&is_video=false&description=HTB UnderPass"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTB UnderPass&body=Check out this article: http://example.com/2025/01/03/HTB-UnderPass/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/01/03/HTB-UnderPass/&title=HTB UnderPass"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/01/03/HTB-UnderPass/&title=HTB UnderPass"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/01/03/HTB-UnderPass/&title=HTB UnderPass"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/01/03/HTB-UnderPass/&title=HTB UnderPass"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/01/03/HTB-UnderPass/&name=HTB UnderPass&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/01/03/HTB-UnderPass/&t=HTB UnderPass"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/tag/">Tag</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

