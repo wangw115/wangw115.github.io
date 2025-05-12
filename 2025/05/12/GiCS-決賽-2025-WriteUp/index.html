@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="team: 我們是被炸的魚rk. 2 (高中職組)規則: 不得用 AI 輔助 今年是我高中最後一年打gics，雖然不像上次一樣第一名，但也覺得雖敗猶榮(?)我們 CTF 分數遙遙領先，只是可惜闖關(micro:bit)硬體疑似有點問題加上我也不擅長那個，所以闖關分就掛零 然後，CTF 部分題型變得更神奇了 Ex. 機器人、晶片…，題目品質也…我解出的是兩題 crypto 變crypto人了(?)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GiCS 決賽 2025 WriteUp">
+<meta property="og:url" content="http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/index.html">
+<meta property="og:site_name" content="wang&#39;s blog">
+<meta property="og:description" content="team: 我們是被炸的魚rk. 2 (高中職組)規則: 不得用 AI 輔助 今年是我高中最後一年打gics，雖然不像上次一樣第一名，但也覺得雖敗猶榮(?)我們 CTF 分數遙遙領先，只是可惜闖關(micro:bit)硬體疑似有點問題加上我也不擅長那個，所以闖關分就掛零 然後，CTF 部分題型變得更神奇了 Ex. 機器人、晶片…，題目品質也…我解出的是兩題 crypto 變crypto人了(?)">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJw7AT6ell.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/r1TICTTlgx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SkqT0Jalxe.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SyP0Xlalgg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJ7jVxplex.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJcIHeTgxg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ryhvBeaxgl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/H1aIwxageg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ry4YDxaggl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/S1CnYlagge.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJnQAxalex.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BkGTbTaggx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJR9zbpxex.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyU0Ip6lee.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1aoDT6exe.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rkOWOTpggx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rkwaTaaegg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1910TTxle.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ry1I0p6leg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/H1-RApaeel.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJjTJR6eeg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rkNwx06elx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJk5gCpgex.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Byp3gAaele.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJ-xWATxxl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SyNf9C6eee.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1Xk3RTgxg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ryQShRallx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rkyoh0aeex.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rJ3wbRaxee.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ry-Y-CTgel.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HkesGRTxex.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rk1K8J0ell.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1jcL10ggx.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SyJdvJRxlg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJaOP10xlg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJ-_Ky0xgg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJthtk0gxg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/H13Tt1Rxel.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SkqOiJRlgl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJMz3JRgxl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJi33JAgel.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SknS9X0lle.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1hqqXAegl.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Bkf1370glg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ByPz2Q0geg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HkhtC0Tlex.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/S1WES8Cxel.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/H1kBBLAege.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SyYorLAxgl.png">
+<meta property="article:published_time" content="2025-05-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-05-12T01:50:19.370Z">
+<meta property="article:author" content="wang">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="robot">
+<meta property="article:tag" content="GiCS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hackmd.io/_uploads/SJw7AT6ell.png">
+    
+    
+    <!-- title -->
+    <title>GiCS 決賽 2025 WriteUp</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-86660611-1"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-86660611-1');
+  </script>
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/tag/">Tag</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/05/02/THJCC-CTF-2025-WriteUp/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/&text=GiCS 決賽 2025 WriteUp"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/&title=GiCS 決賽 2025 WriteUp"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/&is_video=false&description=GiCS 決賽 2025 WriteUp"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=GiCS 決賽 2025 WriteUp&body=Check out this article: http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/&title=GiCS 決賽 2025 WriteUp"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/&title=GiCS 決賽 2025 WriteUp"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/&title=GiCS 決賽 2025 WriteUp"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/&title=GiCS 決賽 2025 WriteUp"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/&name=GiCS 決賽 2025 WriteUp&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/&t=GiCS 決賽 2025 WriteUp"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-1-%E8%B3%BD%E5%BE%8C%E8%A7%A3%E5%87%BA"><span class="toc-number">1.</span> <span class="toc-text">Level 1 (賽後解出)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-2-%E8%B3%BD%E5%BE%8C%E8%A7%A3%E5%87%BA"><span class="toc-number">2.</span> <span class="toc-text">Level 2 (賽後解出)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-3"><span class="toc-number">3.</span> <span class="toc-text">Level 3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-4-%E8%B3%BD%E5%BE%8C%E8%A7%A3%E5%87%BA"><span class="toc-number">4.</span> <span class="toc-text">Level 4 (賽後解出)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-5-%E8%B3%BD%E5%BE%8C%E8%A7%A3%E5%87%BA"><span class="toc-number">5.</span> <span class="toc-text">Level 5 (賽後解出)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-6"><span class="toc-number">6.</span> <span class="toc-text">Level 6</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-7-%E8%B3%BD%E5%BE%8C%E8%A7%A3%E5%87%BA"><span class="toc-number">7.</span> <span class="toc-text">Level 7 (賽後解出)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-8-%E8%B3%BD%E5%BE%8C%E8%A7%A3%E5%87%BA"><span class="toc-number">8.</span> <span class="toc-text">Level 8 (賽後解出)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-9-%E6%9C%AA%E8%A7%A3%E5%87%BA"><span class="toc-number">9.</span> <span class="toc-text">Level 9 (未解出)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-10"><span class="toc-number">10.</span> <span class="toc-text">Level 10</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#micro-bit-%E6%9C%AA%E8%A7%A3%E5%87%BA"><span class="toc-number">11.</span> <span class="toc-text">micro:bit (未解出)</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        GiCS 決賽 2025 WriteUp
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">wang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-05-11T16:00:00.000Z" class="dt-published" itemprop="datePublished">2025-05-12</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CTF/" rel="tag">CTF</a>, <a class="p-category" href="/tags/GiCS/" rel="tag">GiCS</a>, <a class="p-category" href="/tags/robot/" rel="tag">robot</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>team: 我們是被炸的魚<br>rk. 2 (高中職組)<br>規則: 不得用 AI 輔助</p>
+<p>今年是我高中最後一年打gics，雖然不像上次一樣第一名，但也覺得雖敗猶榮(?)<br><del>我們 CTF 分數遙遙領先，只是可惜闖關(micro:bit)硬體疑似有點問題加上我也不擅長那個，所以闖關分就掛零</del></p>
+<p>然後，CTF 部分題型變得更神奇了 Ex. 機器人、晶片…，題目品質也…<br>我解出的是兩題 crypto <del>變crypto人了(?)</del> 第10題靠隊友通靈出 ORZ</p>
+<p><img src="https://hackmd.io/_uploads/SJw7AT6ell.png" alt="image"></p>
+<h3 id="Level-1-賽後解出"><a href="#Level-1-賽後解出" class="headerlink" title="Level 1 (賽後解出)"></a>Level 1 (賽後解出)</h3><p>關卡類型：Binary<br><img src="https://hackmd.io/_uploads/r1TICTTlgx.png" alt="image"><br><img src="https://hackmd.io/_uploads/SkqT0Jalxe.png" alt="image"><br><img src="https://hackmd.io/_uploads/SyP0Xlalgg.png" alt="image"><br>變更副檔名: <code>level1.arj</code><br>可直接右鍵解壓縮<br>得到 <code>lv1-10.bin</code><br><img src="https://hackmd.io/_uploads/BJ7jVxplex.png" alt="image"><br><code>PE32</code>、<code>UPX compressed</code><br>脫殼</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">└─$ upx -d lv1-10.bin</span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/SJcIHeTgxg.png" alt="image"><br>沒殼了<br><img src="https://hackmd.io/_uploads/ryhvBeaxgl.png" alt="image"><br>可拖進 IDA<br>shift + F12 看字串<br><img src="https://hackmd.io/_uploads/H1aIwxageg.png" alt="image"><br>去看 <code>FLAG&#123;%s&#125;</code><br><img src="https://hackmd.io/_uploads/ry4YDxaggl.png" alt="image"><br>追到 <code>sub_4026A0</code><br><img src="https://hackmd.io/_uploads/S1CnYlagge.png" alt="image"><br>flag 是 Buffer<br><img src="https://hackmd.io/_uploads/SJnQAxalex.png" alt="image"><br>sub_402670 看起來是在把一個字串輸出到一個 buffer</p>
+<p><code>sub_402670(Buffer, 33u, &quot;%s%s&quot;, (char)&amp;v8[17])</code> ida 反編譯錯了，(char)&amp;v8[17] 後面還有一個參數，因為 <code>%s%s</code> 對應兩個指標<br>(v8 rename 為 tmp)<br><img src="https://hackmd.io/_uploads/BkGTbTaggx.png" alt="image"><br>[esp+9C+var_90] 是第一個指標 <code>&amp;tmp[17]</code>，[esp+9C+var_8C] 是第二個指標 <code>tmp</code><br>所以完整 Buffer 會變成<br>“95640f2e4b7cc189” + “b4bfc934605ae514”<br><code>FLAG&#123;&quot;95640f2e4b7cc189b4bfc934605ae514&#125;</code> </p>
+<h3 id="Level-2-賽後解出"><a href="#Level-2-賽後解出" class="headerlink" title="Level 2 (賽後解出)"></a>Level 2 (賽後解出)</h3><p>關卡類型：Web<br><img src="https://hackmd.io/_uploads/SJR9zbpxex.png" alt="image"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">└─$ dirsearch -u <span class="string">&quot;http://10.100.215.1/lv2&quot;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/HyU0Ip6lee.png" alt="image"><br>去看所有 200 中特別大那個<br><img src="https://hackmd.io/_uploads/B1aoDT6exe.png" alt="image"><br>往下滑超級長，隨便試幾個 url 點開都是<br><img src="https://hackmd.io/_uploads/rkOWOTpggx.png" alt="image"><br>猜測其中一個通往 flag</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line">res = requests.get(<span class="string">&quot;http://10.100.215.1/lv2/sitemap.xml&quot;</span>)</span><br><span class="line"></span><br><span class="line">soup = BeautifulSoup(res.content, <span class="string">&#x27;xml&#x27;</span>)</span><br><span class="line"></span><br><span class="line">urls = [loc.text <span class="keyword">for</span> loc <span class="keyword">in</span> soup.find_all(<span class="string">&#x27;loc&#x27;</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> url <span class="keyword">in</span> urls:</span><br><span class="line">    err = requests.get(url).text</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;FLAG&quot;</span> <span class="keyword">in</span> err:</span><br><span class="line">        <span class="built_in">print</span>(url)</span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/rkwaTaaegg.png" alt="image"><br>找到兩個都是一樣flag<br><img src="https://hackmd.io/_uploads/B1910TTxle.png" alt="image"></p>
+<h3 id="Level-3"><a href="#Level-3" class="headerlink" title="Level 3"></a>Level 3</h3><p>關卡類型：Cryptography<br><img src="https://hackmd.io/_uploads/ry1I0p6leg.png" alt="image"><br><img src="https://hackmd.io/_uploads/H1-RApaeel.png" alt="image"><br>要解密 level3.txt<br>通靈出 strings XOR key &#x3D; encoded</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line"><span class="comment"># level3.txt</span></span><br><span class="line">c = <span class="string">&quot;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&quot;</span></span><br><span class="line">c = base64.b64decode(c)</span><br><span class="line">strings = <span class="string">&quot;GiCS2025 Level#3&quot;</span></span><br><span class="line">encoded = <span class="string">&quot;krypto9095 woah!&quot;</span></span><br><span class="line">key = xor(strings,encoded)</span><br><span class="line"><span class="comment"># pwntool 的 xor 會將較短的參數循環反覆使用</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(xor(c, key))</span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/HJjTJR6eeg.png" alt="image"></p>
+<h3 id="Level-4-賽後解出"><a href="#Level-4-賽後解出" class="headerlink" title="Level 4 (賽後解出)"></a>Level 4 (賽後解出)</h3><p>關卡類型：Web<br><img src="https://hackmd.io/_uploads/rkNwx06elx.png" alt="image"><br><img src="https://hackmd.io/_uploads/HJk5gCpgex.png" alt="image"><br>點上面這些 page 會改變<br><img src="https://hackmd.io/_uploads/Byp3gAaele.png" alt="image"><br>推測 LFI<br><img src="https://hackmd.io/_uploads/HJ-xWATxxl.png" alt="image"><br><img src="https://hackmd.io/_uploads/SyNf9C6eee.png" alt="image"><br>看 apache log<br><code>var/log/apache2/access.log</code> 看到更多 apache 路徑<br><img src="https://hackmd.io/_uploads/B1Xk3RTgxg.png" alt="image"><br><code>var/log/apache2/error.log</code> 看到 lv4 下的一個路徑<br><img src="https://hackmd.io/_uploads/ryQShRallx.png" alt="image"><br><img src="https://hackmd.io/_uploads/rkyoh0aeex.png" alt="image"></p>
+<h3 id="Level-5-賽後解出"><a href="#Level-5-賽後解出" class="headerlink" title="Level 5 (賽後解出)"></a>Level 5 (賽後解出)</h3><p>關卡類型：Network<br><img src="https://hackmd.io/_uploads/rJ3wbRaxee.png" alt="image"><br><img src="https://hackmd.io/_uploads/ry-Y-CTgel.png" alt="image"><br>在 Burp 開<br><img src="https://hackmd.io/_uploads/HkesGRTxex.png" alt="image"><br>猜測 images&#x2F; 可能有其他圖片<br>在 Repeater 加 <code>X-Forwarded-For</code>，讓 server 辨識出特定地理位置 IP<br><img src="https://hackmd.io/_uploads/rk1K8J0ell.png" alt="image"><br><img src="https://hackmd.io/_uploads/B1jcL10ggx.png" alt="image"></p>
+<h3 id="Level-6"><a href="#Level-6" class="headerlink" title="Level 6"></a>Level 6</h3><p>關卡類型：Steganography<br><img src="https://hackmd.io/_uploads/SyJdvJRxlg.png" alt="image"><br><img src="https://hackmd.io/_uploads/HJaOP10xlg.png" alt="image"><br>是 PCB 檔案，跟電路設計有關<br>開啟工具 <a target="_blank" rel="noopener" href="https://www.pcbway.com/">https://www.pcbway.com</a><br><img src="https://hackmd.io/_uploads/BJ-_Ky0xgg.png" alt="image"></p>
+<h3 id="Level-7-賽後解出"><a href="#Level-7-賽後解出" class="headerlink" title="Level 7 (賽後解出)"></a>Level 7 (賽後解出)</h3><p>關卡類型：Cryptography<br><img src="https://hackmd.io/_uploads/SJthtk0gxg.png" alt="image"><br><img src="https://hackmd.io/_uploads/H13Tt1Rxel.png" alt="image"><br>給了 SSH 公鑰和密文<br>把 SSH 公鑰存在 7.pub<br>從 SSH 公鑰提取 RSA 公鑰<br>發現 e 太小 N 太大，可直接將密文開 e 次方根得到明文</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">enc = <span class="string">b&quot;IqQZV8+h0x0j2NExugSs1lXpQun70GwKmXCjEp5913f/XpzOoMqEhRqu4cC/C1HptlVx8zeAqDPII4pCZdX/ENGeqeGaFMEn3mjg1gaa/DjmCIw8d+66uIsOH8PBzwccdAlzJ77dPib7bpmGoYZGQ9KaNinhf+hifFQpLMauvJSNvbZsmcBUixAR7FK/n2HvxtV4+z4RoRsrGq78bjUwNYquQgf+G0jsAJN2ehjUvFKuSgYgGbIkpkgw9VE70vG95K4q2g902CeAoqfOV7SSVFC3MnAyLSDPJ4VAu3I/K+SFK2o+3b868V/xxydfexbBkonDw/tY2fIdOBH8ABS37+n2TAYOwRYqUbN9ruRAIQqmX5QleukJkZgg1UroIeI7LDJGG/uKaKgBr+LE7d2kOIbCCKJjsAeTEeL+cHKQL5puyGpYMKosaHhDU0gBvJmMjCY9V1evLEorcDX4CuqzKQnFKzEdRNDp7T5eVyvEoFhyJWcGAU8QHTybO65SCJE4VynBCYbTi6qzfszVgniBWIuo9km5aOKqwrfZIDNDnWkgnfjS/gh4IVFXvq3k//xJ4tEa8OhmQaXo+9k0wUWXfMd9oGSuld5mNFk1bPZOahCu6CCj6IBSlo3/7O2Xw95ZJGlWSmkvjxd+XIuiJqZOyPN2h9aGlTk3ztn3XPjFsXN5+VXXqKPRKv5/EvTDrzOs+IL0wgjwpw3k8oNXGTQ3txuHaJxdG+ZpHerNk2ND6y2gr5sCNFOwImZO0Pijx2mZSM1rytOaR8Al5tdVznitkfHJ+jrIQeX947Lo4TRMbbAkZOrasNauMc1ch4LTqQ243pWkoCGIHazWTeqWlbD1rOxDQGGufv+zqdt0q4WgjNdGyRcjINHiYAIdsnBVnJMDxLDYcrDxFYUpDFxefrBsB7ctzyrlCghwCfWF18DmKoA7fV7SG6BfuaDGJJdcKuzAeWW+QKRnvwQySjxAEu3zOSV6O3aak0VhGeGFx8Qmb6+fcspTitwxfav3QMPG3TC5Ql/hIj5tjMMi9twY8mYXV7KMY0d5ra4UNdZbEigvPoVbkaiygMJuGUP9Asgtn/V4zfef9JXIz4wJT0kbF5mS8gNkvnJbOdNWdf/KcL47IVhmmXdpjMM3bRcK0cFD2bbb3eWAQzU=&quot;</span></span><br><span class="line">enc = base64.b64decode(enc)</span><br><span class="line">enc = bytes_to_long(enc)</span><br><span class="line">pub = <span class="built_in">open</span>(<span class="string">&quot;7.pub&quot;</span>,<span class="string">&#x27;rb&#x27;</span>).read()</span><br><span class="line">key = RSA.importKey(pub)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(key.n)</span><br><span class="line"><span class="built_in">print</span>(key.e)</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">m ^ 23 % n = c</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(<span class="built_in">int</span>(gmpy2.iroot(enc, <span class="number">23</span>)[<span class="number">0</span>])))</span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/SkqOiJRlgl.png" alt="image"></p>
+<h3 id="Level-8-賽後解出"><a href="#Level-8-賽後解出" class="headerlink" title="Level 8 (賽後解出)"></a>Level 8 (賽後解出)</h3><p>關卡類型：Chips<br><img src="https://hackmd.io/_uploads/HJMz3JRgxl.png" alt="image"><br>這個頁面每請求一次 data 會加 4<br><img src="https://hackmd.io/_uploads/SJi33JAgel.png" alt="image"><br>但 data 要小於 0 才拿的到 flag<br>透過多 thread 使出現 data 小於 0</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ThreadPoolExecutor</span><br><span class="line"></span><br><span class="line">THREAD_COUNT = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">found = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fetch_data</span>():</span><br><span class="line">    <span class="keyword">global</span> found</span><br><span class="line"></span><br><span class="line">    response = requests.get(<span class="string">&quot;http://10.100.215.1/lv8/chips.php&quot;</span>)</span><br><span class="line">    soup = BeautifulSoup(response.text, <span class="string">&#x27;html.parser&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    data_value = <span class="built_in">int</span>(soup.find_all(<span class="string">&#x27;td&#x27;</span>)[<span class="number">1</span>].text)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> data_value &lt; <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(response.text)</span><br><span class="line">        found = <span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> data_value &lt; <span class="number">100</span>:</span><br><span class="line">        <span class="built_in">print</span>(data_value)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> ThreadPoolExecutor(max_workers=THREAD_COUNT) <span class="keyword">as</span> executor:</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            executor.submit(fetch_data)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/SknS9X0lle.png" alt="image"></p>
+<h3 id="Level-9-未解出"><a href="#Level-9-未解出" class="headerlink" title="Level 9 (未解出)"></a>Level 9 (未解出)</h3><p>關卡類型：Network<br><img src="https://hackmd.io/_uploads/B1hqqXAegl.png" alt="image"><br>BACKDOOR<br>掃 port<br>但 rustscan 只掃出 22 和 80，換 nmap<br><img src="https://hackmd.io/_uploads/Bkf1370glg.png" alt="image"><br>連上 8888 port<br><img src="https://hackmd.io/_uploads/ByPz2Q0geg.png" alt="image"></p>
+<h3 id="Level-10"><a href="#Level-10" class="headerlink" title="Level 10"></a>Level 10</h3><p>關卡類型：Robot<br>經測試，只要在第三句開始，含有 <code>f-l-a-g</code> 就會達條件<br><img src="https://hackmd.io/_uploads/HkhtC0Tlex.png" alt="image"></p>
+<h3 id="micro-bit-未解出"><a href="#micro-bit-未解出" class="headerlink" title="micro:bit (未解出)"></a>micro:bit (未解出)</h3><p>給一台裝有 micro:bit 開發板自走車和讓車走的板子</p>
+<ul>
+<li>第一題: 開啟無線電竊聽模式，接收無線電訊號<br>  <img src="https://hackmd.io/_uploads/S1WES8Cxel.png" alt="image"><br>  要接收廣播訊號<br>  <img src="https://hackmd.io/_uploads/H1kBBLAege.png" alt="image"><br>  用這個積木調到正確的頻道(5)<br>  <img src="https://hackmd.io/_uploads/SyYorLAxgl.png" alt="image"><br>  讓接收到的東西顯示在開發版的 LED</li>
+<li>第二題: (沒仔細看) 大致是要讓自走車走在板子上的黑線，並用車上的鏡頭偵測板子上的東西</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/tag/">Tag</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-1-%E8%B3%BD%E5%BE%8C%E8%A7%A3%E5%87%BA"><span class="toc-number">1.</span> <span class="toc-text">Level 1 (賽後解出)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-2-%E8%B3%BD%E5%BE%8C%E8%A7%A3%E5%87%BA"><span class="toc-number">2.</span> <span class="toc-text">Level 2 (賽後解出)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-3"><span class="toc-number">3.</span> <span class="toc-text">Level 3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-4-%E8%B3%BD%E5%BE%8C%E8%A7%A3%E5%87%BA"><span class="toc-number">4.</span> <span class="toc-text">Level 4 (賽後解出)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-5-%E8%B3%BD%E5%BE%8C%E8%A7%A3%E5%87%BA"><span class="toc-number">5.</span> <span class="toc-text">Level 5 (賽後解出)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-6"><span class="toc-number">6.</span> <span class="toc-text">Level 6</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-7-%E8%B3%BD%E5%BE%8C%E8%A7%A3%E5%87%BA"><span class="toc-number">7.</span> <span class="toc-text">Level 7 (賽後解出)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-8-%E8%B3%BD%E5%BE%8C%E8%A7%A3%E5%87%BA"><span class="toc-number">8.</span> <span class="toc-text">Level 8 (賽後解出)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-9-%E6%9C%AA%E8%A7%A3%E5%87%BA"><span class="toc-number">9.</span> <span class="toc-text">Level 9 (未解出)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Level-10"><span class="toc-number">10.</span> <span class="toc-text">Level 10</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#micro-bit-%E6%9C%AA%E8%A7%A3%E5%87%BA"><span class="toc-number">11.</span> <span class="toc-text">micro:bit (未解出)</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/&text=GiCS 決賽 2025 WriteUp"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/&title=GiCS 決賽 2025 WriteUp"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/&is_video=false&description=GiCS 決賽 2025 WriteUp"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=GiCS 決賽 2025 WriteUp&body=Check out this article: http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/&title=GiCS 決賽 2025 WriteUp"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/&title=GiCS 決賽 2025 WriteUp"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/&title=GiCS 決賽 2025 WriteUp"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/&title=GiCS 決賽 2025 WriteUp"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/&name=GiCS 決賽 2025 WriteUp&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/05/12/GiCS-%E6%B1%BA%E8%B3%BD-2025-WriteUp/&t=GiCS 決賽 2025 WriteUp"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2025
+    wang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/tag/">Tag</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
